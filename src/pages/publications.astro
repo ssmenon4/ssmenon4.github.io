@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import { publications } from "../data/publications";
+---
+
+<BaseLayout title="Publications" noiseBg>
+  <div class="max-w-container-max mx-auto px-gutter py-xl">
+    <header class="mb-xl max-w-3xl">
+      <h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg mb-sm text-primary">
+        Selected Writing &amp; Research
+      </h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant">
+        Peer-reviewed publications in astronomy and machine learning.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-lg relative">
+      <div class="hidden md:block absolute left-[8.333%] top-0 bottom-0 w-px bg-outline-variant opacity-50 ml-[-0.5px]"></div>
+      {
+        publications.map((pub, i) => (
+          <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-12 gap-gutter relative group">
+            <div class="md:col-span-2 pt-xs relative z-10">
+              <div
+                class:list={[
+                  "hidden md:block absolute right-[-24px] top-[10px] w-[8px] h-[8px] rounded-full group-hover:scale-150 transition-all duration-300",
+                  i === 0 ? "bg-primary" : "bg-surface-variant group-hover:bg-primary",
+                ]}
+              />
+              <time class="font-label-sm text-label-sm text-secondary block mb-1">{pub.date}</time>
+              <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">{pub.venue}</span>
+            </div>
+            <article class="md:col-span-8 bg-surface-container-lowest border border-outline-variant p-lg rounded-xl transition-all duration-300 hover:border-outline group-hover:-translate-y-1">
+              <h2 class="font-headline-md text-headline-md mb-sm text-on-surface">{pub.title}</h2>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md">{pub.description}</p>
+              {pub.href && (
+                <a class="inline-flex items-center gap-xs font-label-md text-label-md text-primary hover:text-tertiary transition-colors group/link" href={pub.href}>
+                  {pub.cta ?? "Read more"}
+                  <Icon name="arrow_forward" class="text-sm transition-transform group-hover/link:translate-x-1" />
+                </a>
+              )}
+            </article>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

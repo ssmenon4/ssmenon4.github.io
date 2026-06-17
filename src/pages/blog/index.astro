@@ -1,0 +1,109 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import { getCollection } from "astro:content";
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const [main, secondary, ...rest] = posts;
+const accents = ["text-primary", "text-secondary", "text-tertiary"];
+---
+
+<BaseLayout title="Blog" noiseBg>
+  <div class="w-full max-w-container-max mx-auto px-gutter py-xl">
+    <section class="mb-xl text-center md:text-left max-w-2xl">
+      <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-sm">Digital Journal</h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant">
+        Notes on machine learning, LLMs, and research engineering.
+      </p>
+    </section>
+
+    {
+      (main || secondary) && (
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-xl">
+          {main && (
+            <article class="md:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden group hover:border-primary transition-colors duration-300 flex flex-col md:flex-row relative">
+              <a href={`/blog/${main.slug}`} class="contents">
+                <div class="w-full md:w-1/2 p-lg flex flex-col justify-center order-2 md:order-1 relative z-10">
+                  <div class="flex items-center gap-sm mb-md">
+                    <span class="bg-surface-container py-xs px-sm rounded-full font-label-sm text-label-sm text-on-surface-variant">{main.data.category}</span>
+                    <span class="font-label-sm text-label-sm text-outline">{fmt(main.data.date)}</span>
+                  </div>
+                  <h2 class="font-headline-md text-headline-md text-on-surface mb-md group-hover:text-primary transition-colors duration-300">{main.data.title}</h2>
+                  <p class="font-body-md text-body-md text-on-surface-variant mb-lg line-clamp-3">{main.data.description}</p>
+                  <span class="font-label-md text-label-md text-primary flex items-center gap-xs mt-auto w-max group-hover:gap-sm transition-all duration-300">
+                    Read Article <Icon name="arrow_forward" size={18} />
+                  </span>
+                </div>
+                {main.data.image && (
+                  <div class="w-full md:w-1/2 h-64 md:h-auto order-1 md:order-2 p-md bg-surface-container-low flex items-center justify-center relative overflow-hidden">
+                    <img alt={main.data.title} class="w-full h-full object-cover pebble-shape shadow-sm" src={main.data.image} />
+                  </div>
+                )}
+              </a>
+            </article>
+          )}
+          {secondary && (
+            <article class="md:col-span-4 bg-surface-container-low rounded-xl p-lg flex flex-col group relative overflow-hidden">
+              <a href={`/blog/${secondary.slug}`} class="contents">
+                <div class="absolute -right-12 -top-12 w-40 h-40 bg-secondary-container rounded-full opacity-50 blur-2xl"></div>
+                <div class="flex items-center gap-sm mb-md relative z-10">
+                  <span class="bg-surface-container-highest py-xs px-sm rounded-full font-label-sm text-label-sm text-on-surface-variant">{secondary.data.category}</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-sm relative z-10 group-hover:text-primary transition-colors duration-300">{secondary.data.title}</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-grow relative z-10 line-clamp-4">{secondary.data.description}</p>
+                <div class="mt-auto relative z-10 flex justify-between items-center">
+                  <span class="font-label-sm text-label-sm text-outline">{fmt(secondary.data.date)}</span>
+                  <span class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300">
+                    <Icon name="arrow_outward" size={20} />
+                  </span>
+                </div>
+              </a>
+            </article>
+          )}
+        </section>
+      )
+    }
+
+    {
+      rest.length > 0 && (
+        <section>
+          <div class="flex items-center justify-between mb-lg border-b border-outline-variant pb-sm">
+            <h2 class="font-headline-sm text-headline-sm text-on-surface">Recent Entries</h2>
+          </div>
+          <div class="flex flex-col gap-lg">
+            {rest.map((post, i) => (
+              <article class="group border-b border-outline-variant/50 pb-lg last:border-0">
+                <a href={`/blog/${post.slug}`} class="flex flex-col md:flex-row gap-lg items-start md:items-center">
+                  <div class="w-full md:w-48 h-32 flex-shrink-0 rounded-lg overflow-hidden bg-surface-container">
+                    {post.data.image ? (
+                      <img alt={post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" src={post.data.image} />
+                    ) : (
+                      <div class="w-full h-full bg-tertiary-container/20 flex items-center justify-center">
+                        <Icon name="article" class="text-tertiary text-4xl" />
+                      </div>
+                    )}
+                  </div>
+                  <div class="flex-grow">
+                    <div class="flex items-center gap-sm mb-xs">
+                      <span class:list={["font-label-sm text-label-sm", accents[i % 3]]}>{post.data.category}</span>
+                      <span class="text-outline-variant">•</span>
+                      <span class="font-label-sm text-label-sm text-outline">{fmt(post.data.date)}</span>
+                    </div>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs group-hover:text-primary transition-colors duration-300">{post.data.title}</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">{post.data.description}</p>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </div>
+</BaseLayout>

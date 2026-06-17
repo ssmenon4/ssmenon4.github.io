@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+type Props = { post: CollectionEntry<"blog"> };
+const { post } = Astro.props;
+const { Content } = await post.render();
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+---
+
+<BaseLayout title={post.data.title} description={post.data.description} image={post.data.image} noiseBg>
+  <article class="max-w-3xl mx-auto px-gutter py-xl">
+    <a href="/blog" class="inline-flex items-center gap-xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors mb-lg">
+      <Icon name="arrow_back" size={18} /> All entries
+    </a>
+
+    <header class="mb-lg">
+      <div class="flex items-center gap-sm mb-md">
+        <span class="bg-surface-container py-xs px-sm rounded-full font-label-sm text-label-sm text-on-surface-variant">{post.data.category}</span>
+        <span class="font-label-sm text-label-sm text-outline">{fmt(post.data.date)}</span>
+      </div>
+      <h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-sm">{post.data.title}</h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant">{post.data.description}</p>
+    </header>
+
+    {
+      post.data.image && (
+        <div class="w-full aspect-[16/9] rounded-xl overflow-hidden mb-xl bg-surface-container">
+          <img alt={post.data.title} class="w-full h-full object-cover pebble-shape" src={post.data.image} />
+        </div>
+      )
+    }
+
+    <div class="prose-portfolio font-body-lg text-body-lg text-on-surface-variant">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  /* Lightweight typographic styling for rendered Markdown */
+  .prose-portfolio :is(h1, h2, h3, h4) {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: var(--color-on-surface);
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 2rem 0 0.75rem;
+  }
+  .prose-portfolio h2 {
+    font-size: 28px;
+  }
+  .prose-portfolio h3 {
+    font-size: 22px;
+  }
+  .prose-portfolio p {
+    margin: 0 0 1.25rem;
+  }
+  .prose-portfolio a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-portfolio ul,
+  .prose-portfolio ol {
+    margin: 0 0 1.25rem 1.25rem;
+    list-style: revert;
+  }
+  .prose-portfolio li {
+    margin-bottom: 0.4rem;
+  }
+  .prose-portfolio blockquote {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    color: var(--color-on-surface);
+    font-style: italic;
+  }
+  .prose-portfolio img {
+    border-radius: 0.75rem;
+    margin: 1.5rem 0;
+  }
+  .prose-portfolio :is(code, pre) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+  }
+  .prose-portfolio pre {
+    background: var(--color-surface-container-high);
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+  .prose-portfolio :not(pre) > code {
+    background: var(--color-surface-container-high);
+    padding: 0.15em 0.4em;
+    border-radius: 0.25rem;
+  }
+</style>

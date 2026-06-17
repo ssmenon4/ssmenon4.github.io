@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import { projects } from "../data/projects";
+
+const [p1, p2, p3, ...rest] = projects;
+const pebble = ["pebble-shape", "pebble-shape-2", "pebble-shape-3"];
+---
+
+<BaseLayout title="Projects" noiseBg>
+  <div class="w-full max-w-container-max mx-auto px-gutter py-xl">
+    <header class="mb-xl max-w-2xl">
+      <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-sm">Selected Works.</h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant">
+        Research and applied machine-learning projects, with links to published papers and code.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-lg md:gap-xl items-start">
+      {
+        p1 && (
+          <article class="md:col-span-7 group cursor-pointer flex flex-col gap-md">
+            <a href={p1.href ?? "#"} class="contents">
+              <div class="relative w-full aspect-[4/3] bg-surface-container-low hover:bg-surface-container-high transition-colors duration-500 rounded-3xl overflow-hidden border border-outline-variant/30 flex items-center justify-center p-md">
+                {p1.image ? (
+                  <img alt={p1.title} class="w-full h-full object-cover pebble-shape transition-transform duration-700 group-hover:scale-105" src={p1.image} />
+                ) : (
+                  <Icon name={p1.icon ?? "folder"} class="text-primary/60" size={96} />
+                )}
+              </div>
+              <div class="flex flex-col gap-xs pl-sm">
+                <div class="flex items-center gap-sm">
+                  <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-label-sm">{p1.tag}</span>
+                  {p1.year && <span class="text-outline font-label-sm text-label-sm">{p1.year}</span>}
+                </div>
+                <h2 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors duration-300">{p1.title}</h2>
+                <p class="text-on-surface-variant font-body-md text-body-md max-w-md">{p1.description}</p>
+              </div>
+            </a>
+          </article>
+        )
+      }
+
+      {
+        p2 && (
+          <article class="md:col-span-5 md:mt-24 group cursor-pointer flex flex-col gap-md">
+            <a href={p2.href ?? "#"} class="contents">
+              <div class="relative w-full aspect-square bg-surface-container-high hover:bg-surface-container-highest transition-colors duration-500 rounded-3xl overflow-hidden border border-outline-variant/30 flex items-center justify-center p-md">
+                {p2.image ? (
+                  <img alt={p2.title} class="w-full h-full object-cover pebble-shape-2 transition-transform duration-700 group-hover:scale-105" src={p2.image} />
+                ) : (
+                  <Icon name={p2.icon ?? "folder"} class="text-secondary/60" size={96} />
+                )}
+              </div>
+              <div class="flex flex-col gap-xs pl-sm">
+                <div class="flex items-center gap-sm">
+                  <span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-sm text-label-sm">{p2.tag}</span>
+                  {p2.year && <span class="text-outline font-label-sm text-label-sm">{p2.year}</span>}
+                </div>
+                <h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors duration-300">{p2.title}</h2>
+                <p class="text-on-surface-variant font-body-md text-body-md">{p2.description}</p>
+              </div>
+            </a>
+          </article>
+        )
+      }
+
+      {
+        p3 && (
+          <article class="md:col-span-12 mt-lg md:mt-xl group cursor-pointer flex flex-col md:flex-row gap-lg items-center bg-surface-container-low hover:bg-surface-container-high transition-colors duration-500 rounded-3xl p-lg border border-outline-variant/30 relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-primary-container opacity-20 pebble-shape-3 blur-3xl"></div>
+            {p3.image && (
+              <div class="w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:h-[400px] bg-surface-container rounded-2xl overflow-hidden p-sm">
+                <img alt={p3.title} class="w-full h-full object-cover rounded-xl transition-transform duration-700 group-hover:scale-105" src={p3.image} />
+              </div>
+            )}
+            <div class="w-full md:w-1/2 flex flex-col gap-sm z-10">
+              <div class="flex items-center gap-sm mb-xs">
+                <span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full font-label-sm text-label-sm border border-outline/20">{p3.tag}</span>
+                {p3.year && <span class="text-outline font-label-sm text-label-sm">{p3.year}</span>}
+              </div>
+              <h2 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors duration-300">{p3.title}</h2>
+              <p class="text-on-surface-variant font-body-lg text-body-lg mb-sm">{p3.description}</p>
+              <a href={p3.href ?? "#"} class="self-start text-primary font-label-md text-label-md flex items-center gap-xs hover:text-tertiary transition-colors duration-300">
+                View Case Study <Icon name="arrow_forward" size={18} />
+              </a>
+            </div>
+          </article>
+        )
+      }
+
+      {
+        rest.map((p, i) => (
+          <article class="md:col-span-4 group cursor-pointer flex flex-col gap-md">
+            <a href={p.href ?? "#"} class="contents">
+              <div class="relative w-full aspect-[4/3] bg-surface-container-low hover:bg-surface-container-high transition-colors duration-500 rounded-3xl overflow-hidden border border-outline-variant/30 flex items-center justify-center p-md">
+                {p.image ? (
+                  <img alt={p.title} class:list={["w-full h-full object-cover transition-transform duration-700 group-hover:scale-105", pebble[i % 3]]} src={p.image} />
+                ) : (
+                  <Icon name={p.icon ?? "folder"} class="text-primary/60" size={80} />
+                )}
+              </div>
+              <div class="flex flex-col gap-xs pl-sm">
+                <div class="flex items-center gap-sm">
+                  <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-label-sm">{p.tag}</span>
+                  {p.year && <span class="text-outline font-label-sm text-label-sm">{p.year}</span>}
+                </div>
+                <h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors duration-300">{p.title}</h2>
+                <p class="text-on-surface-variant font-body-md text-body-md">{p.description}</p>
+              </div>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

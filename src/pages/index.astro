@@ -1,0 +1,176 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../config/site";
+import { projects } from "../data/projects";
+import { experience } from "../data/resume";
+
+const heroImage =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuBGtZTsSeUhQrEiREpzufyoem1z1m4JdDOwCVn1QfC_oQR3TxbBLvs6S4NQaq-doiijQ5cqZOon0m0dINVYxNY6Xtw_tvQiJdzfHitXY_iu-4Lk5OQHOPotxDEzw_ZXVDGhWauMm3VlewN8ghE_QaHkAyqBuBZXj1UlHLTD78RrJdfXrwedXdn8OhJpdPeWHNdkJem511PUlVklnBy-9Ks8WCEAt9eCXYm7ttgR4hfVCy1wDHqAatCAWQY6ZHZol_QsZq4Z_5NU8qE";
+const featured = projects.filter((p) => p.featured).slice(0, 3);
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="relative pt-xl pb-[120px] px-gutter max-w-container-max mx-auto">
+    <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none flex justify-center items-center opacity-40">
+      <div class="w-[40vw] h-[40vw] bg-secondary-container rounded-full mix-blend-multiply dark:mix-blend-screen blur-3xl absolute -left-[10vw] top-[102px]"></div>
+      <div class="w-[30vw] h-[30vw] bg-primary-container rounded-full mix-blend-multiply dark:mix-blend-screen blur-3xl absolute right-[5vw] -top-[51px]"></div>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-center relative min-h-[70vh]">
+      <div class="w-full md:w-2/3 md:absolute md:left-0 md:top-1/4 z-10 bg-background/80 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none p-md md:p-0 rounded-3xl md:pr-xl">
+        <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-md">
+          Engineering AI, from research to production.
+        </h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+          {site.description}
+        </p>
+        <div class="pt-lg flex gap-sm">
+          <a
+            class="inline-flex items-center justify-center bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-lg scale-95 hover:scale-100 transition-transform duration-300 ease-in-out shadow-lg"
+            href="/projects"
+          >
+            View Projects
+          </a>
+          <a
+            class="inline-flex items-center justify-center border border-outline text-on-surface font-label-md text-label-md px-md py-sm rounded-lg scale-95 hover:scale-100 hover:bg-surface-container-high transition-all duration-300 ease-in-out bg-surface/50"
+            href={`mailto:${site.email}`}
+          >
+            Say Hello
+          </a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 md:absolute md:right-0 md:bottom-0 mt-xl md:mt-0">
+        <div class="w-full aspect-[3/4] md:aspect-square rounded-[48px] rounded-tl-[120px] rounded-br-[120px] overflow-hidden border-8 border-background shadow-2xl relative transition-colors duration-500">
+          <img alt="Creative workspace" class="w-full h-full object-cover" src={heroImage} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="py-xl px-gutter max-w-container-max mx-auto" id="projects">
+    <div class="mb-xl text-center md:text-left">
+      <h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Featured Projects</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant max-w-xl md:mx-0 mx-auto">
+        Selected research and applied machine-learning work.
+      </p>
+    </div>
+    <div class="flex flex-col md:flex-row gap-lg">
+      <div class="flex flex-col gap-lg flex-1 md:mt-xl">
+        {
+          featured[0] && (
+            <a
+              href={featured[0].href ?? "/projects"}
+              class="group relative rounded-[40px] rounded-tr-[8px] overflow-hidden border border-outline-variant bg-surface-container hover:bg-surface-container-high transition-colors duration-500 cursor-pointer p-sm flex flex-col aspect-[4/5]"
+            >
+              <div class="flex-1 rounded-3xl overflow-hidden relative mb-sm bg-primary-container/40">
+                {featured[0].image ? (
+                  <img
+                    alt={featured[0].title}
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    src={featured[0].image}
+                  />
+                ) : (
+                  <div class="absolute inset-0 flex items-center justify-center text-on-primary-container/70">
+                    <Icon name={featured[0].icon ?? "folder"} size={72} />
+                  </div>
+                )}
+              </div>
+              <div class="px-md pb-md pt-sm">
+                <span class="inline-block px-sm py-xs bg-secondary-container text-on-secondary-container font-label-sm text-label-sm rounded-full mb-sm">
+                  {featured[0].tag}
+                </span>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">{featured[0].title}</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">{featured[0].description}</p>
+              </div>
+            </a>
+          )
+        }
+      </div>
+      <div class="flex flex-col gap-lg flex-1">
+        {
+          featured[1] && (
+            <a
+              href={featured[1].href ?? "/projects"}
+              class="group relative rounded-[40px] rounded-bl-[8px] border border-outline-variant bg-surface-container hover:bg-surface-container-high transition-colors duration-500 cursor-pointer p-lg flex flex-col justify-between aspect-square"
+            >
+              <div>
+                <span class="inline-block px-sm py-xs bg-primary-container text-on-primary-container font-label-sm text-label-sm rounded-full mb-md">
+                  {featured[1].tag}
+                </span>
+                <h3 class="font-headline-md text-headline-md text-on-surface mb-sm">{featured[1].title}</h3>
+                <p class="font-body-lg text-body-lg text-on-surface-variant">{featured[1].description}</p>
+              </div>
+              <div class="self-end w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center transform group-hover:translate-x-2 transition-all duration-300">
+                <Icon name="arrow_forward" />
+              </div>
+            </a>
+          )
+        }
+        {
+          featured[2] && (
+            <a
+              href={featured[2].href ?? "/projects"}
+              class="group relative rounded-[40px] rounded-tl-[8px] border border-outline-variant bg-surface-container hover:bg-surface-container-high transition-colors duration-500 cursor-pointer p-lg flex flex-col justify-between overflow-hidden aspect-[4/3]"
+            >
+              {featured[2].image && (
+                <div class="absolute inset-0 -z-10 opacity-30 dark:opacity-20">
+                  <img
+                    alt=""
+                    class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-screen"
+                    src={featured[2].image}
+                  />
+                </div>
+              )}
+              <div>
+                <span class="inline-block px-sm py-xs bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm rounded-full mb-md">
+                  {featured[2].tag}
+                </span>
+                <h3 class="font-headline-md text-headline-md text-on-surface">{featured[2].title}</h3>
+              </div>
+              <div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300">
+                <Icon name="arrow_forward" class="text-current" />
+              </div>
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience preview -->
+  <section class="py-xl px-gutter max-w-container-max mx-auto" id="experience">
+    <div class="flex flex-col md:flex-row gap-xl items-start">
+      <div class="md:w-1/3 md:sticky md:top-32">
+        <h2 class="font-headline-md text-headline-md text-on-surface mb-sm">The Journey So Far</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-md">
+          A timeline of my professional growth and creative endeavors.
+        </p>
+        <a class="inline-flex items-center gap-xs font-label-md text-label-md text-primary hover:text-tertiary transition-colors" href="/resume">
+          Full resume <Icon name="arrow_forward" size={18} />
+        </a>
+      </div>
+      <div class="md:w-2/3 flex flex-col gap-md border-l-2 border-outline-variant pl-lg md:pl-xl relative transition-colors duration-500">
+        {
+          experience.map((job, i) => (
+            <div class="relative bg-surface-container-lowest border border-outline-variant rounded-[32px] rounded-tl-none p-lg hover:shadow-md transition-all duration-500 mt-md md:mt-0">
+              <div
+                class:list={[
+                  "absolute -left-[calc(48px+2px)] top-8 w-6 h-6 rounded-full border-4 border-background flex items-center justify-center z-10",
+                  i === 0 ? "bg-secondary" : "bg-primary",
+                ]}
+              />
+              <span class="inline-block px-sm py-xs bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full mb-sm">
+                {job.period}
+              </span>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">{job.role}</h3>
+              <h4 class="font-label-md text-label-md text-primary mb-md">{job.org}</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant">{job.summary}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

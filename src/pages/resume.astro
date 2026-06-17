@@ -1,0 +1,128 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import { experience, education, skills, approach, resumePdf } from "../data/resume";
+---
+
+<BaseLayout title="Resume" noiseBg>
+  <div class="w-full max-w-container-max mx-auto px-gutter py-xl relative z-10">
+    <header class="flex flex-col md:flex-row justify-between items-start md:items-end mb-xl">
+      <div>
+        <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-sm">Resume</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          A summary of my work across AI engineering, machine-learning research, and the systems in between.
+        </p>
+      </div>
+      {
+        resumePdf && (
+          <a
+            href={resumePdf}
+            class="mt-md md:mt-0 flex items-center gap-xs bg-surface-container-low text-primary border border-outline-variant px-md py-sm rounded-lg font-label-md text-label-md hover:bg-surface-container transition-colors duration-300"
+          >
+            <Icon name="download" size={18} />
+            Download PDF
+          </a>
+        )
+      }
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-xl">
+      <!-- Timeline -->
+      <div class="md:col-span-8 space-y-xl">
+        <section>
+          <h2 class="font-headline-md text-headline-md text-on-surface mb-lg flex items-center gap-sm">
+            <span class="material-symbols-outlined text-secondary bg-secondary-container p-sm pebble-shape">work</span>
+            Experience
+          </h2>
+          <div class="relative pl-md border-l border-outline-variant space-y-lg">
+            {
+              experience.map((job, i) => (
+                <div class="relative">
+                  <div
+                    class:list={[
+                      "absolute -left-[29px] top-1 w-[10px] h-[10px] rounded-full border-2 border-background",
+                      i === 0 ? "bg-primary" : "bg-outline-variant",
+                    ]}
+                  />
+                  <div class="bg-surface-container-lowest border border-surface-variant p-lg rounded-xl transition-colors duration-300">
+                    <div class="flex flex-col md:flex-row justify-between mb-sm">
+                      <h3 class="font-headline-sm text-headline-sm text-on-surface">{job.role}</h3>
+                      <span class="font-label-sm text-label-sm text-secondary bg-secondary-container/30 dark:bg-secondary-container px-sm py-xs rounded-full inline-block mt-xs md:mt-0 self-start">
+                        {job.period}
+                      </span>
+                    </div>
+                    <h4 class="font-label-md text-label-md text-primary mb-md">{job.org}</h4>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-md">{job.summary}</p>
+                    {job.highlights && (
+                      <ul class="list-disc list-inside space-y-xs font-body-md text-body-md text-on-surface-variant ml-sm">
+                        {job.highlights.map((h) => (
+                          <li>{h}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-headline-md text-headline-md text-on-surface mb-lg flex items-center gap-sm">
+            <span class="material-symbols-outlined text-tertiary bg-tertiary-container dark:text-on-tertiary-container p-sm pebble-shape-alt">school</span>
+            Education
+          </h2>
+          <div class="relative pl-md border-l border-outline-variant space-y-lg">
+            {
+              education.map((ed) => (
+                <div class="relative">
+                  <div class="absolute -left-[29px] top-1 w-[10px] h-[10px] rounded-full bg-tertiary border-2 border-background" />
+                  <div class="bg-surface-container-lowest border border-surface-variant p-lg rounded-xl transition-colors duration-300">
+                    <div class="flex flex-col md:flex-row justify-between mb-sm">
+                      <h3 class="font-headline-sm text-headline-sm text-on-surface">{ed.role}</h3>
+                      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-sm py-xs rounded-full inline-block mt-xs md:mt-0 self-start">
+                        {ed.period}
+                      </span>
+                    </div>
+                    <h4 class="font-label-md text-label-md text-primary mb-md">{ed.org}</h4>
+                    <p class="font-body-md text-body-md text-on-surface-variant">{ed.summary}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="md:col-span-4 space-y-xl">
+        <section class="bg-surface-container-low p-lg rounded-xl border border-surface-variant transition-colors duration-300">
+          <h2 class="font-headline-md text-headline-md text-on-surface mb-md">Skills</h2>
+          {
+            skills.map((s) => (
+              <div class="mb-md last:mb-0">
+                <h3 class="font-label-md text-label-md text-on-surface mb-sm">{s.group}</h3>
+                <div class="flex flex-wrap gap-xs">
+                  {s.items.map((item) => (
+                    <span class="bg-surface-container-high text-on-surface px-sm py-xs rounded-full font-label-sm text-label-sm border border-outline-variant">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </section>
+
+        <section class="bg-secondary-container/20 dark:bg-secondary-container p-lg rounded-xl border border-secondary-container transition-colors duration-300">
+          <h2 class="font-headline-md text-headline-md text-on-surface mb-md">Approach</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant mb-md dark:text-on-secondary-container">{approach}</p>
+          <div class="flex items-center gap-sm text-secondary dark:text-on-secondary-container">
+            <Icon name="psychology" />
+            <span class="font-label-md text-label-md">Research-Driven</span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

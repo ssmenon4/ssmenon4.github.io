@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Design tokens — Warm & Organic (light) / Midnight & Ochre (dark)    */
+/* Ported from the Google Stitch project.                              */
+/* ------------------------------------------------------------------ */
+@layer base {
+  :root {
+    --color-background: #fbf9f4;
+    --color-on-background: #1b1c19;
+    --color-surface: #fbf9f4;
+    --color-on-surface: #1b1c19;
+    --color-surface-variant: #e4e2dd;
+    --color-on-surface-variant: #54433d;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #f5f3ee;
+    --color-surface-container: #f0eee9;
+    --color-surface-container-high: #eae8e3;
+    --color-surface-container-highest: #e4e2dd;
+    --color-primary: #94492c;
+    --color-on-primary: #ffffff;
+    --color-primary-container: #d67d5c;
+    --color-on-primary-container: #541902;
+    --color-secondary: #556343;
+    --color-on-secondary: #ffffff;
+    --color-secondary-container: #d5e5bd;
+    --color-on-secondary-container: #596747;
+    --color-tertiary: #835415;
+    --color-on-tertiary: #ffffff;
+    --color-tertiary-container: #c08946;
+    --color-on-tertiary-container: #432700;
+    --color-outline: #87736c;
+    --color-outline-variant: #dac1b9;
+    --color-error: #ba1a1a;
+    --color-on-error: #ffffff;
+    --color-error-container: #ffdad6;
+    --color-on-error-container: #93000a;
+  }
+
+  html.dark {
+    --color-background: #090c15;
+    --color-on-background: #f0f4f8;
+    --color-surface: #090c15;
+    --color-on-surface: #f0f4f8;
+    --color-surface-variant: #1d2840;
+    --color-on-surface-variant: #a3b3cc;
+    --color-surface-container-lowest: #090c15;
+    --color-surface-container-low: #0e1424;
+    --color-surface-container: #131b2f;
+    --color-surface-container-high: #1d2840;
+    --color-surface-container-highest: #263450;
+    --color-primary: #cc8822;
+    --color-on-primary: #150d03;
+    --color-primary-container: #4a3008;
+    --color-on-primary-container: #fcebcc;
+    --color-secondary: #364563;
+    --color-on-secondary: #f0f4f8;
+    --color-secondary-container: #1d2840;
+    --color-on-secondary-container: #a9b8d6;
+    --color-tertiary: #364563;
+    --color-on-tertiary: #f0f4f8;
+    --color-tertiary-container: #1d2840;
+    --color-on-tertiary-container: #a9b8d6;
+    --color-outline: #364563;
+    --color-outline-variant: #263450;
+    --color-error: #ba1a1a;
+    --color-on-error: #ffffff;
+    --color-error-container: #ffdad6;
+    --color-on-error-container: #93000a;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Material Symbols icon font                                          */
+/* ------------------------------------------------------------------ */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ------------------------------------------------------------------ */
+/* Subtle fixed film-grain overlay                                     */
+/* ------------------------------------------------------------------ */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Inline page-background grain variant used on some pages */
+.noise-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ------------------------------------------------------------------ */
+/* Organic "pebble" shapes that slowly morph their border-radius       */
+/* ------------------------------------------------------------------ */
+.pebble-shape {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morph 8s ease-in-out infinite alternate;
+}
+.pebble-shape-2 {
+  border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%;
+  animation: morph2 9s ease-in-out infinite alternate;
+}
+.pebble-shape-3 {
+  border-radius: 50% 50% 40% 60% / 40% 50% 50% 60%;
+  animation: morph3 10s ease-in-out infinite alternate;
+}
+.pebble-shape-alt {
+  border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+}
+
+@keyframes morph {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+}
+@keyframes morph2 {
+  0% {
+    border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%;
+  }
+  100% {
+    border-radius: 60% 40% 40% 60% / 50% 40% 60% 50%;
+  }
+}
+@keyframes morph3 {
+  0% {
+    border-radius: 50% 50% 40% 60% / 40% 50% 50% 60%;
+  }
+  100% {
+    border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pebble-shape,
+  .pebble-shape-2,
+  .pebble-shape-3 {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
