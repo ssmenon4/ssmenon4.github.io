@@ -5,13 +5,13 @@ const year = new Date().getFullYear();
 
 <footer class="w-full py-xl bg-surface-container mt-xl border-t border-outline-variant/30 transition-colors duration-500">
   <div class="flex flex-col md:flex-row justify-between items-center gap-md px-gutter max-w-container-max mx-auto">
-    <div class="text-headline-sm font-headline-sm text-secondary transition-colors duration-500">
+    <div class="text-headline-sm font-headline-sm text-secondary dark:text-on-secondary-container transition-colors duration-500">
       {site.brand}
     </div>
     <div class="font-label-sm text-label-sm text-on-surface-variant order-last md:order-none">
       © {year} {site.author}. {site.footerNote}
     </div>
-    <ul class="flex space-x-md font-label-sm text-label-sm text-secondary transition-colors duration-500">
+    <ul class="flex space-x-md font-label-sm text-label-sm text-secondary dark:text-on-secondary-container transition-colors duration-500">
       {
         socials.map((s) => (
           <li>

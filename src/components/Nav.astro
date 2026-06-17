@@ -8,7 +8,7 @@ const isActive = (href: string) =>
   href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
 ---
 
-<nav class="w-full sticky top-0 bg-background/80 backdrop-blur-sm z-50 transition-all duration-300">
+<nav id="site-nav" class="w-full sticky top-0 z-50">
   <div class="flex justify-between items-center h-20 px-gutter max-w-container-max mx-auto">
     <a class="text-headline-md font-headline-md text-primary tracking-tight" href="/">{site.brand}</a>
 
@@ -83,10 +83,19 @@ const isActive = (href: string) =>
   (() => {
     const btn = document.getElementById("mobile-menu-btn");
     const menu = document.getElementById("mobile-menu");
-    if (!btn || !menu) return;
-    btn.addEventListener("click", () => {
-      const open = menu.classList.toggle("hidden");
-      btn.setAttribute("aria-expanded", String(!open));
-    });
+    if (btn && menu) {
+      btn.addEventListener("click", () => {
+        const open = menu.classList.toggle("hidden");
+        btn.setAttribute("aria-expanded", String(!open));
+      });
+    }
+
+    // Transparent over the hero; solidify into an opaque bar once scrolled.
+    const nav = document.getElementById("site-nav");
+    if (nav) {
+      const onScroll = () => nav.classList.toggle("nav-scrolled", window.scrollY > 10);
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    }
   })();
 </script>
