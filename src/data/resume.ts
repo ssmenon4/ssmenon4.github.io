@@ -20,9 +20,9 @@ export const experience: Entry[] = [
     summary:
       "A focused, self-directed chapter spent preparing for India's Civil Services (UPSC) examination. I built a holistic understanding of current and historical socio-economic issues, the digital divide, and the scope for AI across Indian industries. Extensive research into public policy and governance sharpened how I analyse complex, real-world problems.",
     highlights: [
-      "Research & Analysis — synthesised large volumes of information across Economics, Public Administration, and International Relations into structured, coherent understanding.",
+      "Research & Analysis — synthesised large volumes of information across Economics, Public Administration, and International Relations into structured understanding.",
       "Policy & Writing — broke down complex real-world issues and drafted analytical essays and reports under time constraints.",
-      "Discipline & Rigor — sustained intensive daily study routines that reinforced focus, self-management, goal-oriented behavior, and high-pressure endurance.",
+      "Discipline & Rigor — sustained daily study routines that reinforced focus, self-management, goal-oriented behavior, and high-pressure endurance.",
     ],
   },
   {
