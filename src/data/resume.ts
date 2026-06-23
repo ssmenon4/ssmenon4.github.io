@@ -98,7 +98,7 @@ export const skills: { group: string; items: string[] }[] = [
 ];
 
 export const approach =
-  "I work at the intersection of research and production — turning LLMs, retrieval systems, and ML models into reliable software. I care about rigorous evaluation, efficient training, and representations that actually fit the problem.";
+  "I work at the intersection of research and production — turning LLMs, multi-agent systems, and retrieval into reliable software. I like to explore ambitiously but verify before I trust, building things that fit the problem and keeping them as simple as it allows.";
 
 /** Optional: drop a PDF in /public and point here, or leave null to hide the button. */
 export const resumePdf: string | null = "/SSM_Resume.pdf";

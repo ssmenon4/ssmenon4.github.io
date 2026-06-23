@@ -63,9 +63,16 @@ const fmt = (d: Date) =>
     margin: 0 0 1.25rem;
   }
   .prose-portfolio a {
-    color: var(--color-primary);
+    color: rgb(var(--color-primary));
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+  .prose-portfolio a.link-highlight {
+    color: rgb(var(--color-primary));
+    font-weight: 600;
+  }
+  .prose-portfolio a.link-highlight:hover {
+    color: rgb(var(--color-primary-container));
   }
   .prose-portfolio ul,
   .prose-portfolio ol {
