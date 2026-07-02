@@ -30,7 +30,6 @@ export const nav = [
 /** Social links shown in the footer. Remove any you don't use. */
 export const socials = [
   { label: "LinkedIn", href: "https://linkedin.com/in/ssmenon3181" },
-  // TODO: verify your exact GitHub username — this is a best guess.
-  { label: "GitHub", href: "https://github.com/Entropy4" },
+  { label: "GitHub", href: "https://github.com/ssmenon4" },
   { label: "Email", href: "mailto:ssmenon761@gmail.com" },
 ];
