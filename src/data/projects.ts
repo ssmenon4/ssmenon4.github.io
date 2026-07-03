@@ -72,7 +72,7 @@ export const projects: Project[] = [
     description:
       "Parsed and analyzed deep-sky observation data from the GALEX satellite's spacecraft state files. Derived an empirical model of UV foreground emissions using robust regression, and generalized it to deep and medium-sky observations.",
     image: "/projects/Galex.jpg",
-    href: "https://www.sciencedirect.com/science/article/pii/S0273117722007542",
+    href: "https://doi.org/10.1016/j.asr.2022.07.086",
     featured: true,
   },
 ];

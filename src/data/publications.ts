@@ -35,6 +35,6 @@ export const publications: Publication[] = [
     description:
       "N. Narayanan, S.S. Menon, et al. — An empirical model of UV foreground emission derived from GALEX deep observations, using robust regression. Advances in Space Research 71.1, pp. 1059–1073.",
     cta: "View Paper",
-    href: "https://www.sciencedirect.com/science/article/pii/S0273117722007542",
+    href: "https://doi.org/10.1016/j.asr.2022.07.086",
   },
 ];
