@@ -31,7 +31,6 @@ export const projects: Project[] = [
     year: "2026",
     description:
     "A fully automated multi-agent simulation of a D&D campaign: a Dungeon Master, an Orchestrator/referee, and player-characters, each backed by an LLM, coordinated by a structured engine loop. World state changes only through typed tool calls — never parsed from prose — so every change is logged, replayable, and testable. The engineering focus is on reliable ways to promote and evaluate long-horizon planning in agent behavior, and also observe inter-agent coordination. Ongoing project.",
-    image: "/projects/Amphoreus.jpeg",    // optional custom poster; falls back to the YouTube thumbnail
     slug: "amphoreus-dnd",
     videoId: "kjCKjF4DJ-c",
     href: "/projects#amphoreus-dnd",

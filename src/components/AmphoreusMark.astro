@@ -1,0 +1,130 @@
+---
+/**
+ * Amphoreus lemniscate mark — the campaign turn cycle rendered as a dense
+ * band of near-identical figure-eight orbits, with three labeled nodes:
+ * ORCH (the crossing point every intent passes through), DM (narration
+ * lobe, left apex), and PLAYERS ×13 (a quiet trio standing in for the
+ * full roster, right lobe).
+ *
+ * Ported verbatim from the mock's `.fig-net` renderer
+ * (docs/superpowers/specs/2026-07-04-portfolio-redesign-mock.html).
+ *
+ * Vanilla canvas, no deps. Redraws on `data-theme` flips (MutationObserver),
+ * same pattern as LorenzHero.astro.
+ */
+interface Props {
+  height?: number;
+}
+
+const { height = 120 } = Astro.props;
+---
+
+<canvas class="amphoreus-mark" style={`width:100%; height:${height}px; display:block;`}></canvas>
+
+<script>
+  function css(v: string): string {
+    return getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  }
+
+  function setup(cv: HTMLCanvasElement) {
+    const dpr = window.devicePixelRatio || 1;
+    const w = cv.clientWidth;
+    const h = cv.clientHeight;
+    cv.width = w * dpr;
+    cv.height = h * dpr;
+    const ctx = cv.getContext("2d")!;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+    return { ctx, w, h };
+  }
+
+  function draw(cv: HTMLCanvasElement) {
+    const ink = css("--sub");
+    const sig = css("--signal");
+    const meta = css("--meta");
+
+    const { ctx, w, h } = setup(cv);
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2;
+    const cy = h / 2;
+    const a = Math.min(w * 0.42, h * 0.6);
+
+    function pt(t: number, sc: number): [number, number] {
+      const st = Math.sin(t);
+      const ct = Math.cos(t);
+      const d = 1 + st * st;
+      return [cx + (sc * a * ct) / d, cy + (sc * a * st * ct) / d];
+    }
+
+    // dense band of near-identical orbits, same technique as the masthead
+    // attractor: thin strokes, alpha ramp, trajectories that never quite coincide
+    let seed = 5;
+    function rnd() {
+      seed = (seed * 16807) % 2147483647;
+      return seed / 2147483647;
+    }
+    const P = 14;
+    for (let pass = 0; pass < P; pass++) {
+      const sc = 0.86 + 0.14 * (pass / P) + (rnd() - 0.5) * 0.02;
+      const ph = (rnd() - 0.5) * 0.06;
+      ctx.strokeStyle = ink;
+      ctx.lineWidth = 0.5;
+      ctx.globalAlpha = 0.05 + 0.16 * (pass / P);
+      ctx.beginPath();
+      for (let i = 0; i <= 300; i++) {
+        const p = pt((i / 300) * Math.PI * 2 + ph, sc);
+        i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]);
+      }
+      ctx.stroke();
+    }
+
+    ctx.globalAlpha = 1;
+    ctx.font = "8.5px ui-monospace,Menlo,monospace";
+    ctx.textAlign = "center";
+
+    // ORCH — the referee is the crossing point: every intent passes through it
+    ctx.fillStyle = sig;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 4, 0, 7);
+    ctx.fill();
+    ctx.fillText("ORCH", cx, cy + 16);
+
+    // DM — narration lobe (left apex)
+    const dm = pt(Math.PI, 1);
+    ctx.fillStyle = ink;
+    ctx.beginPath();
+    ctx.arc(dm[0], dm[1], 3, 0, 7);
+    ctx.fill();
+    ctx.fillText("DM", dm[0], dm[1] - 9);
+
+    // PLAYERS — a quiet trio on the right lobe stands in for the 13
+    [-0.22, 0, 0.22].forEach((t, i) => {
+      const p = pt(t, i === 1 ? 1 : 0.93);
+      ctx.fillStyle = ink;
+      ctx.globalAlpha = 0.85;
+      ctx.beginPath();
+      ctx.arc(p[0], p[1], 2.2, 0, 7);
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = meta;
+    const pl = pt(0.22, 1);
+    ctx.fillText("PLAYERS ×13", pl[0] - 16, pl[1] + 15);
+  }
+
+  function start() {
+    document.querySelectorAll<HTMLCanvasElement>("canvas.amphoreus-mark").forEach((cv) => {
+      draw(cv);
+      new MutationObserver(() => draw(cv)).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["data-theme"],
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+</script>

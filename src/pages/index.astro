@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import LorenzHero from "../components/LorenzHero.astro";
 import StatusStrip from "../components/StatusStrip.astro";
 import Plate from "../components/Plate.astro";
+import AmphoreusMark from "../components/AmphoreusMark.astro";
 import { site, socials } from "../config/site";
 import { projects } from "../data/projects";
 import { publications } from "../data/publications";
@@ -106,7 +107,7 @@ function venueFor(href?: string) {
               <div>
                 {p.slug === "amphoreus-dnd" ? (
                   <Plate caption="fig. 2 — the turn cycle · every intent passes<br>through the orchestrator · no orbit repeats">
-                    <div class="ph" style="height:120px">[fig. 2 — lemniscate mark · Task 6]</div>
+                    <AmphoreusMark height={120} />
                   </Plate>
                 ) : p.image?.includes("AdaGen") ? (
                   <Plate caption="fig. 3 — vibration trace, cobblestone">
