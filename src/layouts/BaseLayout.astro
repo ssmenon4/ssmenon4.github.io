@@ -8,15 +8,12 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
-  /** Adds the page-background grain (used by inner pages). */
-  noiseBg?: boolean;
 }
 
 const {
   title,
   description = site.description,
   image,
-  noiseBg = false,
 } = Astro.props;
 
 const pageTitle = title ? `${title} — ${site.brand}` : `${site.brand} — ${site.role}`;
@@ -25,7 +22,7 @@ const ogImage = image ? new URL(image, Astro.site ?? Astro.url).toString() : und
 ---
 
 <!doctype html>
-<html lang="en" class="light">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,37 +46,18 @@ const ogImage = image ? new URL(image, Astro.site ?? Astro.url).toString() : und
     <meta name="twitter:description" content={description} />
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-    />
-
     <!-- Apply saved/system theme before paint to avoid a flash -->
     <script is:inline>
       (() => {
         try {
           const stored = localStorage.getItem("theme");
-          const dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-          document.documentElement.classList.toggle("dark", dark);
-          document.documentElement.classList.toggle("light", !dark);
+          if (stored === "dark" || stored === "light")
+            document.documentElement.setAttribute("data-theme", stored);
         } catch {}
       })();
     </script>
   </head>
-  <body
-    class:list={[
-      "bg-background text-on-background font-body-md text-body-md antialiased overflow-x-hidden min-h-screen flex flex-col transition-colors duration-500",
-      noiseBg && "noise-bg",
-    ]}
-  >
-    <div class="grain-overlay"></div>
+  <body class="min-h-screen flex flex-col">
     <Nav />
     <main class="flex-grow">
       <slot />

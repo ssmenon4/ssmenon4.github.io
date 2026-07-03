@@ -1,89 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-// Design tokens ported faithfully from the Google Stitch "Warm & Organic" theme.
-// Colors are driven by CSS variables (see src/styles/global.css) so light/dark
-// mode swap is a single class toggle on <html>.
+// Design tokens live in src/styles/global.css as CSS custom properties.
+// Tailwind is kept for layout utilities only.
 export default {
-  darkMode: "class",
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}"],
-  theme: {
-    extend: {
-      colors: {
-        background: "rgb(var(--color-background) / <alpha-value>)",
-        "on-background": "rgb(var(--color-on-background) / <alpha-value>)",
-        surface: "rgb(var(--color-surface) / <alpha-value>)",
-        "on-surface": "rgb(var(--color-on-surface) / <alpha-value>)",
-        "surface-variant": "rgb(var(--color-surface-variant) / <alpha-value>)",
-        "on-surface-variant": "rgb(var(--color-on-surface-variant) / <alpha-value>)",
-        "surface-container-lowest": "rgb(var(--color-surface-container-lowest) / <alpha-value>)",
-        "surface-container-low": "rgb(var(--color-surface-container-low) / <alpha-value>)",
-        "surface-container": "rgb(var(--color-surface-container) / <alpha-value>)",
-        "surface-container-high": "rgb(var(--color-surface-container-high) / <alpha-value>)",
-        "surface-container-highest": "rgb(var(--color-surface-container-highest) / <alpha-value>)",
-        primary: "rgb(var(--color-primary) / <alpha-value>)",
-        "on-primary": "rgb(var(--color-on-primary) / <alpha-value>)",
-        "primary-container": "rgb(var(--color-primary-container) / <alpha-value>)",
-        "on-primary-container": "rgb(var(--color-on-primary-container) / <alpha-value>)",
-        secondary: "rgb(var(--color-secondary) / <alpha-value>)",
-        "on-secondary": "rgb(var(--color-on-secondary) / <alpha-value>)",
-        "secondary-container": "rgb(var(--color-secondary-container) / <alpha-value>)",
-        "on-secondary-container": "rgb(var(--color-on-secondary-container) / <alpha-value>)",
-        tertiary: "rgb(var(--color-tertiary) / <alpha-value>)",
-        "on-tertiary": "rgb(var(--color-on-tertiary) / <alpha-value>)",
-        "tertiary-container": "rgb(var(--color-tertiary-container) / <alpha-value>)",
-        "on-tertiary-container": "rgb(var(--color-on-tertiary-container) / <alpha-value>)",
-        outline: "rgb(var(--color-outline) / <alpha-value>)",
-        "outline-variant": "rgb(var(--color-outline-variant) / <alpha-value>)",
-        error: "rgb(var(--color-error) / <alpha-value>)",
-        "on-error": "rgb(var(--color-on-error) / <alpha-value>)",
-        "error-container": "rgb(var(--color-error-container) / <alpha-value>)",
-        "on-error-container": "rgb(var(--color-on-error-container) / <alpha-value>)",
-      },
-      borderRadius: {
-        DEFAULT: "0.25rem",
-        lg: "0.5rem",
-        xl: "0.75rem",
-        full: "9999px",
-      },
-      spacing: {
-        base: "8px",
-        xs: "4px",
-        sm: "12px",
-        md: "24px",
-        gutter: "24px",
-        lg: "48px",
-        xl: "80px",
-        "container-max": "1200px",
-      },
-      maxWidth: {
-        "container-max": "1200px",
-      },
-      fontFamily: {
-        "body-lg": ["Literata", "serif"],
-        "body-md": ["Literata", "serif"],
-        "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
-        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
-        "display-lg": ["Plus Jakarta Sans", "sans-serif"],
-        "display-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
-        "label-sm": ["Plus Jakarta Sans", "sans-serif"],
-        "label-md": ["Plus Jakarta Sans", "sans-serif"],
-      },
-      fontSize: {
-        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
-        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-        "headline-sm": ["24px", { lineHeight: "32px", fontWeight: "600" }],
-        "headline-md": ["32px", { lineHeight: "40px", fontWeight: "600" }],
-        "display-lg": [
-          "48px",
-          { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" },
-        ],
-        "display-lg-mobile": [
-          "36px",
-          { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" },
-        ],
-        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "500" }],
-        "label-md": ["14px", { lineHeight: "20px", fontWeight: "600" }],
-      },
-    },
-  },
+  corePlugins: { preflight: true },
+  theme: { extend: {} },
   plugins: [],
 };
