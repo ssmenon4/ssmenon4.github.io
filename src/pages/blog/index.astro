@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Icon from "../../components/Icon.astro";
+import SeriesBadge from "../../components/SeriesBadge.astro";
 import { getCollection } from "astro:content";
 
 const fmt = (d: Date) =>
@@ -11,7 +12,25 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 );
 
 const [main, secondary, ...rest] = posts;
-const accents = ["text-primary", "text-secondary", "text-tertiary"];
+
+// Series grouping: map each series id to its overview title + member count,
+// so parts scattered through the date-sorted feed still read as one series.
+const seriesInfo = new Map<string, { title: string; count: number }>();
+for (const p of posts) {
+  if (!p.data.series) continue;
+  const info = seriesInfo.get(p.data.series) ?? { title: "", count: 0 };
+  info.count++;
+  if ((p.data.order ?? 0) === 0) info.title = p.data.title;
+  seriesInfo.set(p.data.series, info);
+}
+const seriesBadge = (p: (typeof posts)[number]) => {
+  const id = p.data.series;
+  if (!id) return null;
+  const info = seriesInfo.get(id);
+  if (!info) return null;
+  // Hub (order 0) advertises the whole set; parts name the series they belong to.
+  return (p.data.order ?? 0) === 0 ? `${info.count - 1}-part series` : info.title;
+};
 ---
 
 <BaseLayout title="Blog" noiseBg>
@@ -31,7 +50,8 @@ const accents = ["text-primary", "text-secondary", "text-tertiary"];
               <a href={`/blog/${main.slug}`} class="contents">
                 <div class="w-full md:w-1/2 p-lg flex flex-col justify-center order-2 md:order-1 relative z-10">
                   <div class="flex items-center gap-sm mb-md">
-                    <span class="bg-surface-container py-xs px-sm rounded-full font-label-sm text-label-sm text-on-surface-variant">{main.data.category}</span>
+                    <span class="bg-surface-container py-xs px-sm rounded-full font-label-sm text-label-sm text-primary">{main.data.category}</span>
+                    <SeriesBadge label={seriesBadge(main)} />
                     <span class="font-label-sm text-label-sm text-outline">{fmt(main.data.date)}</span>
                   </div>
                   <h2 class="font-headline-md text-headline-md text-on-surface mb-md group-hover:text-primary transition-colors duration-300">{main.data.title}</h2>
@@ -53,7 +73,8 @@ const accents = ["text-primary", "text-secondary", "text-tertiary"];
               <a href={`/blog/${secondary.slug}`} class="contents">
                 <div class="absolute -right-12 -top-12 w-40 h-40 bg-secondary-container rounded-full opacity-50 blur-2xl"></div>
                 <div class="flex items-center gap-sm mb-md relative z-10">
-                  <span class="bg-surface-container-highest py-xs px-sm rounded-full font-label-sm text-label-sm text-on-surface-variant">{secondary.data.category}</span>
+                  <span class="bg-surface-container-highest py-xs px-sm rounded-full font-label-sm text-label-sm text-primary">{secondary.data.category}</span>
+                  <SeriesBadge label={seriesBadge(secondary)} />
                 </div>
                 <h3 class="font-headline-sm text-headline-sm text-on-surface mb-sm relative z-10 group-hover:text-primary transition-colors duration-300">{secondary.data.title}</h3>
                 <p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-grow relative z-10 line-clamp-4">{secondary.data.description}</p>
@@ -74,10 +95,10 @@ const accents = ["text-primary", "text-secondary", "text-tertiary"];
       rest.length > 0 && (
         <section>
           <div class="flex items-center justify-between mb-lg border-b border-outline-variant pb-sm">
-            <h2 class="font-headline-sm text-headline-sm text-on-surface">Recent Entries</h2>
+            <h2 class="font-headline-sm text-headline-sm text-on-surface">Recent Entries <span class="font-label-sm text-label-sm text-outline">(newest to oldest)</span></h2>
           </div>
           <div class="flex flex-col gap-lg">
-            {rest.map((post, i) => (
+            {rest.map((post) => (
               <article class="group border-b border-outline-variant/50 pb-lg last:border-0">
                 <a href={`/blog/${post.slug}`} class="flex flex-col md:flex-row gap-lg items-start md:items-center">
                   <div class="w-full md:w-48 h-32 flex-shrink-0 rounded-lg overflow-hidden bg-surface-container">
@@ -91,7 +112,8 @@ const accents = ["text-primary", "text-secondary", "text-tertiary"];
                   </div>
                   <div class="flex-grow">
                     <div class="flex items-center gap-sm mb-xs">
-                      <span class:list={["font-label-sm text-label-sm", accents[i % 3]]}>{post.data.category}</span>
+                      <span class="font-label-sm text-label-sm text-primary">{post.data.category}</span>
+                      <SeriesBadge label={seriesBadge(post)} />
                       <span class="text-outline-variant">•</span>
                       <span class="font-label-sm text-label-sm text-outline">{fmt(post.data.date)}</span>
                     </div>

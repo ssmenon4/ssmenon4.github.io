@@ -1,7 +1,7 @@
 ---
 title: "Amphoreus D&D: orchestrating believable, long-horizon agent behavior"
 description: "A fully automated multi-agent LLM simulation of a D&D campaign — and a way to measure whether the agents actually behave coherently over a long horizon, not just turn to turn."
-date: 2026-06-21
+date: 2026-07-02
 category: "AI Engineering"
 featured: true
 image: "/projects/Amphoreus.jpeg"

@@ -13,6 +13,14 @@ const blog = defineCollection({
     date: z.coerce.date(),
     category: z.string().default("Writing"),
     image: z.string().optional(),
+    // Set true when `image` is a diagram used only as the index thumbnail /
+    // social preview, not as an in-article hero (the diagram is placed inline
+    // instead). Suppresses the top-of-article hero render.
+    hideHero: z.boolean().default(false),
+    // Series grouping: `series` is a shared slug; `order` sets reading order,
+    // with the hub/overview post at order 0 and parts numbered from 1.
+    series: z.string().optional(),
+    order: z.number().optional(),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
