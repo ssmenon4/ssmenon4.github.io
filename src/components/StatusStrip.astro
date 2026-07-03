@@ -1,0 +1,11 @@
+---
+import { nowStatus } from "../data/now";
+import { buildInfo } from "../lib/build-info";
+const { lastCommitRelative } = buildInfo();
+---
+<div class="status mono">
+  <div><span class="led">●</span> {nowStatus.openTo}</div>
+  <div>LAST COMMIT <b>{lastCommitRelative}</b></div>
+  <div>CURRENTLY BUILDING <b>{nowStatus.building}</b></div>
+  {nowStatus.reading && <div>READING <b>{nowStatus.reading}</b></div>}
+</div>
