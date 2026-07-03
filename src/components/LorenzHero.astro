@@ -11,8 +11,8 @@
  * - Drag (mouse / touch) to reorient freely; 3s after the last drag it eases
  *   back to the default tilt and resumes auto-rotation.
  * - Colour gradient + dot colour adapt to light / dark theme (driven by the
- *   `.dark` class on <html>, watched via MutationObserver).
- * - A "?" button explains why the Lorenz attractor is here.
+ *   `data-theme` attribute on <html>, watched via MutationObserver, and read
+ *   from CSS custom properties at runtime).
  *
  * Vanilla canvas — no 3D library, to match the project's zero-JS-deps setup.
  */
@@ -23,61 +23,7 @@
   data-lorenz
 >
   <canvas class="lorenz-canvas w-full h-full block" style="touch-action: none;"></canvas>
-
-  <div class="lorenz-help-wrap absolute top-3 right-3 z-20">
-    <button
-      type="button"
-      aria-label="Why Lorenz Attractor?"
-      aria-expanded="false"
-      class="lorenz-help w-8 h-8 rounded-full grid place-items-center bg-primary text-on-primary font-bold shadow-lg ring-2 ring-background/70 hover:bg-tertiary hover:scale-110 transition-all duration-200 font-label-md text-label-md leading-none"
-    >
-      ?
-    </button>
-    <span
-      class="lorenz-tooltip pointer-events-none absolute right-full top-1/2 -translate-y-1/2 mr-2 whitespace-nowrap rounded-md bg-surface-container-high text-on-surface px-sm py-1 font-label-sm text-label-sm shadow-md opacity-0 transition-opacity duration-200"
-    >
-      Why Lorenz Attractor?
-    </span>
-    <div
-      role="dialog"
-      class="lorenz-popover absolute right-0 top-full mt-2 w-[260px] origin-top-right rounded-2xl bg-surface-container-high border border-outline-variant shadow-xl p-md font-body-md text-body-md leading-relaxed text-on-surface-variant text-left opacity-0 scale-95 -translate-y-1 pointer-events-none transition-all duration-200"
-    >
-      <p>
-        I've been fascinated by Chaos Theory and the Lorenz Attractor since I was a child. This is
-        merely me appreciating its beauty and sharing it with the world!{" "}
-        <a
-          href="https://www.reddit.com/r/explainlikeimfive/comments/o0mvog/eli5_the_lorenz_attractor_and_chaos_theory"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-primary hover:text-tertiary underline underline-offset-2"
-        >
-          You can read more about it here.
-        </a>
-      </p>
-    </div>
-  </div>
 </div>
-
-<style>
-  .lorenz-help-wrap:not(.open) .lorenz-help:hover ~ .lorenz-tooltip {
-    opacity: 1;
-  }
-  /* Touch devices can't hover, so always show the label hint until the
-     popover is opened — and make it tappable (it opens the popover too) so it
-     isn't a dead target next to the small button. */
-  @media (max-width: 768px) {
-    .lorenz-help-wrap:not(.open) .lorenz-tooltip {
-      opacity: 1;
-      pointer-events: auto;
-      cursor: pointer;
-    }
-  }
-  .lorenz-help-wrap.open .lorenz-popover {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-  }
-</style>
 
 <script>
   type Stop = [number, number, number];
@@ -86,22 +32,13 @@
   const RHO = 28;
   const BETA = 8 / 3;
 
-  // Trajectory colour gradients (start -> end of the integrated path).
-  const PALETTE_LIGHT: Stop[] = [
-    [120, 55, 30], // deep rust
-    [148, 73, 44], // primary
-    [214, 125, 92], // warm orange
-    [192, 137, 70], // ochre
-  ];
-  const PALETTE_DARK: Stop[] = [
-    [204, 136, 34], // gold (dark primary)
-    [232, 182, 96],
-    [252, 235, 204], // cream
-    [214, 140, 80],
-  ];
-  // Dot-lattice colour [light, dark].
-  const DOT_LIGHT: Stop = [120, 90, 80];
-  const DOT_DARK: Stop = [150, 168, 200];
+  // Read a hex colour custom property (e.g. "--trail") off <html> at
+  // runtime, so the palette always tracks the active theme's tokens.
+  function cssRGB(name: string): Stop {
+    const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const n = parseInt(v.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
 
   const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
@@ -125,36 +62,6 @@
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-
-    // ---- Help popover ----------------------------------------------------
-    const wrap = host.querySelector<HTMLElement>(".lorenz-help-wrap");
-    const helpBtn = host.querySelector<HTMLButtonElement>(".lorenz-help");
-    const popover = host.querySelector<HTMLElement>(".lorenz-popover");
-    const tooltip = host.querySelector<HTMLElement>(".lorenz-tooltip");
-    if (wrap && helpBtn && popover) {
-      const toggle = (e: Event) => {
-        e.stopPropagation();
-        const open = wrap.classList.toggle("open");
-        helpBtn.setAttribute("aria-expanded", String(open));
-      };
-      helpBtn.addEventListener("click", toggle);
-      // The always-on mobile label is a tap target too, so tapping it (instead
-      // of the small "?") still opens the explanation rather than doing nothing.
-      tooltip?.addEventListener("click", toggle);
-      popover.addEventListener("click", (e) => e.stopPropagation());
-      document.addEventListener("click", (e) => {
-        if (!wrap.contains(e.target as Node)) {
-          wrap.classList.remove("open");
-          helpBtn.setAttribute("aria-expanded", "false");
-        }
-      });
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          wrap.classList.remove("open");
-          helpBtn.setAttribute("aria-expanded", "false");
-        }
-      });
-    }
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
@@ -252,17 +159,24 @@
     // Precompute colour per drawing bucket + dot colour.
     const BUCKETS = isMobile ? 70 : 110;
     let colors: string[] = [];
-    let dotRGB: Stop = DOT_LIGHT;
+    let palette: Stop[] = [];
+    let dotRGB: Stop = [0, 0, 0];
     let isDark = false;
+    const detectDark = () => {
+      const attr = document.documentElement.getAttribute("data-theme");
+      if (attr === "dark") return true;
+      if (attr === "light") return false;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    };
     const buildColors = () => {
-      isDark = document.documentElement.classList.contains("dark");
-      const pal = isDark ? PALETTE_DARK : PALETTE_LIGHT;
+      isDark = detectDark();
+      palette = [cssRGB("--trail"), cssRGB("--signal"), cssRGB("--signal-bright")];
       colors = [];
       for (let b = 0; b < BUCKETS; b++) {
-        const rgb = sampleStops(pal, b / (BUCKETS - 1));
+        const rgb = sampleStops(palette, b / (BUCKETS - 1));
         colors.push(`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`);
       }
-      dotRGB = isDark ? DOT_DARK : DOT_LIGHT;
+      dotRGB = cssRGB("--line-strong");
     };
     buildColors();
 
@@ -346,8 +260,15 @@
     const themeObserver = new MutationObserver(buildColors);
     themeObserver.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ["class"],
+      attributeFilter: ["data-theme"],
     });
+    // No explicit data-theme means the page follows the OS setting, so also
+    // react to the media query flipping (e.g. system dark mode toggled).
+    const darkMedia = window.matchMedia("(prefers-color-scheme: dark)");
+    const onMediaChange = () => {
+      if (!document.documentElement.getAttribute("data-theme")) buildColors();
+    };
+    darkMedia.addEventListener("change", onMediaChange);
 
     // ---- Render loop -----------------------------------------------------
     const px = new Float32Array(N);
@@ -507,7 +428,7 @@
       // Head markers: a glossy little sphere per particle so the viewer can
       // track each one (and watch it pick a lobe). An offset highlight + dark
       // terminator give it a 3D read; a soft halo lifts it off the rail.
-      const pal = isDark ? PALETTE_DARK : PALETTE_LIGHT;
+      const pal = palette;
       const baseR = isMobile ? 4 : 5.5;
       for (let p = 0; p < PARTICLES; p++) {
         const hi = Math.floor(heads[p]);
