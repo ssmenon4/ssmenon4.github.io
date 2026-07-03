@@ -2,16 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageMast from "../components/PageMast.astro";
 import Plate from "../components/Plate.astro";
-import AmphoreusMark from "../components/AmphoreusMark.astro";
 import VideoEmbed from "../components/VideoEmbed.astro";
 import { projects } from "../data/projects";
 
 const anchor = (p: (typeof projects)[number], i: number) => p.slug ?? `p-0${i + 1}`;
 
-function fieldLabel(title: string): string {
-  // Short mono-caps slug for the datasheet's left column, derived from the highlight title.
-  return title.split(/\s+/)[0].toUpperCase();
-}
+const fieldLabels = ["ORCHESTRATION", "MEMORY", "EVALUATION"];
 ---
 
 <BaseLayout title="Projects">
@@ -76,9 +72,9 @@ function fieldLabel(title: string): string {
 
           {p.highlights && (
             <table class="datasheet">
-              {p.highlights.map((h) => (
+              {p.highlights.map((h, i) => (
                 <tr>
-                  <td class="lbl mono">{fieldLabel(h.title)}</td>
+                  <td class="lbl mono">{fieldLabels[i] ?? h.title.split(" ")[0].toUpperCase()}</td>
                   <td class="detail">{h.detail}</td>
                 </tr>
               ))}
