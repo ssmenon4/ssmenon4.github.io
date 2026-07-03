@@ -22,6 +22,10 @@ export type Project = {
   blogHref?: string;
   /** Technical highlights shown as a feature strip beneath a demo video. */
   highlights?: { title: string; detail: string }[];
+  /** Whether the project is still actively being worked on, or a finished/published piece. */
+  status?: "ongoing" | "published";
+  /** Mono-caps tech stack line shown in the /projects dossier, e.g. "PYTHON / CHROMADB / MULTI-PROVIDER LLM". */
+  stack?: string;
 };
 
 export const projects: Project[] = [
@@ -36,6 +40,8 @@ export const projects: Project[] = [
     href: "/projects#amphoreus-dnd",
     blogHref: "/blog/amphoreus-dnd",
     featured: true,
+    status: "ongoing",
+    stack: "PYTHON / CHROMADB / MULTI-PROVIDER LLM",
     highlights: [
       {
         title: "Multi-agent orchestration",
@@ -63,6 +69,8 @@ export const projects: Project[] = [
     image: "/projects/AdaGen.jpg",
     href: "https://doi.org/10.1007/s42979-024-03181-w",
     featured: true,
+    status: "published",
+    stack: "PYTORCH / TRANSFER LEARNING / SENSOR DATA",
   },
   {
     title: "Foreground Emissions Modeling for Astronomy",
@@ -73,5 +81,7 @@ export const projects: Project[] = [
     image: "/projects/Galex.jpg",
     href: "https://doi.org/10.1016/j.asr.2022.07.086",
     featured: true,
+    status: "published",
+    stack: "ROBUST REGRESSION / GALEX TELEMETRY",
   },
 ];

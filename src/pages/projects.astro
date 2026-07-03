@@ -1,155 +1,164 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Icon from "../components/Icon.astro";
+import PageMast from "../components/PageMast.astro";
+import Plate from "../components/Plate.astro";
+import AmphoreusMark from "../components/AmphoreusMark.astro";
 import VideoEmbed from "../components/VideoEmbed.astro";
 import { projects } from "../data/projects";
 
-const videoProjects = projects.filter((p) => p.videoId);
-const gallery = projects.filter((p) => !p.videoId);
-const [p1, p2, p3, ...rest] = gallery;
-const pebble = ["pebble-shape", "pebble-shape-2", "pebble-shape-3"];
+const anchor = (p: (typeof projects)[number], i: number) => p.slug ?? `p-0${i + 1}`;
+
+function fieldLabel(title: string): string {
+  // Short mono-caps slug for the datasheet's left column, derived from the highlight title.
+  return title.split(/\s+/)[0].toUpperCase();
+}
 ---
 
-<BaseLayout title="Projects" noiseBg>
-  <div class="w-full max-w-container-max mx-auto px-gutter py-xl">
-    <header class="mb-xl max-w-2xl">
-      <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-sm">Selected Works.</h1>
-      <p class="font-body-lg text-body-lg text-on-surface-variant">
-        Research and applied machine-learning projects, with links to published papers and code.
-      </p>
-    </header>
+<BaseLayout title="Projects">
+  <div class="page">
+    <PageMast
+      crumb="WORK"
+      title="Work"
+      sub="Systems that can be measured — retrieval pipelines, multi-agent engines, and the evaluation harnesses that keep them honest."
+      kv={`${projects.length} PROJECTS · 2023 — ONGOING · 2 PEER-REVIEWED`}
+    />
+
+    <table class="ledger">
+      {
+        projects.map((p, i) => (
+          <tr>
+            <td class="n">P-0{i + 1}</td>
+            <td>
+              <a href={`#${anchor(p, i)}`}>{p.title}</a>
+            </td>
+            <td class="f">{p.tag.toUpperCase()}</td>
+            <td class="st">
+              {p.status === "ongoing" ? (
+                <>
+                  <span class="on">●</span> ONGOING · {p.year}
+                </>
+              ) : (
+                <>PUBLISHED · {p.year}</>
+              )}
+            </td>
+          </tr>
+        ))
+      }
+    </table>
 
     {
-      videoProjects.map((p) => (
-        <section id={p.slug} class="mb-xl scroll-mt-32 flex flex-col gap-lg bg-surface-container-low border border-outline-variant/30 rounded-3xl p-lg md:p-xl">
-          <div class="flex flex-col md:flex-row gap-lg md:gap-xl items-center">
-            <div class="w-full md:w-2/5 flex flex-col gap-sm">
-              <div class="flex items-center gap-sm">
-                <span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-sm text-label-sm">{p.tag}</span>
-                {p.year && <span class="text-outline font-label-sm text-label-sm">{p.year}</span>}
-              </div>
-              <h2 class="font-headline-md text-headline-md text-on-surface">{p.title}</h2>
-              <p class="font-body-lg text-body-lg text-on-surface-variant">{p.description}</p>
-              {p.blogHref && (
-                <a href={p.blogHref} class="self-start mt-xs text-primary font-label-md text-label-md flex items-center gap-xs hover:text-tertiary transition-colors duration-300">
-                  Read in detail <Icon name="arrow_forward" size={18} />
-                </a>
-              )}
-            </div>
-            <div class="w-full md:w-3/5">
-              <VideoEmbed videoId={p.videoId!} title={p.title} poster={p.image} />
-            </div>
+      projects.map((p, i) => (
+        <section id={anchor(p, i)} class="dossier">
+          <h2>{p.title}</h2>
+          <div class="mono dossier-line">
+            {p.year} · {p.status === "ongoing" ? "ONGOING" : "PUBLISHED"} · {p.stack}
           </div>
-          {p.highlights && (
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
-              {p.highlights.map((h) => (
-                <div class="bg-surface-container-high border border-outline-variant/30 rounded-2xl p-md flex flex-col gap-xs">
-                  <h3 class="font-label-lg text-label-lg text-on-surface">{h.title}</h3>
-                  <p class="font-body-md text-body-md text-on-surface-variant">{h.detail}</p>
-                </div>
-              ))}
-            </div>
+
+          {p.videoId ? (
+            <>
+              <VideoEmbed videoId={p.videoId} title={p.title} poster={p.image} />
+              <div class="plate-cap" style="text-align:right; margin-top:7px;">
+                plate 1 — engine demo · click to play
+              </div>
+            </>
+          ) : (
+            <Plate caption="plate 1 — duotoned to unify with the rest of the page">
+              <div style="position:relative;">
+                <img
+                  src={p.image}
+                  alt=""
+                  style="display:block; width:100%; height:340px; object-fit:cover; filter:grayscale(1) contrast(1.08) brightness(1.02);"
+                />
+                <div style="position:absolute; inset:0; background:var(--signal); mix-blend-mode:color; opacity:.45;" />
+              </div>
+            </Plate>
           )}
+
+          {p.highlights && (
+            <table class="datasheet">
+              {p.highlights.map((h) => (
+                <tr>
+                  <td class="lbl mono">{fieldLabel(h.title)}</td>
+                  <td class="detail">{h.detail}</td>
+                </tr>
+              ))}
+            </table>
+          )}
+
+          {!p.highlights && <p class="dossier-desc">{p.description}</p>}
+
+          <div class="dossier-links mono">
+            {p.videoId && p.blogHref && <a href={p.blogHref}>READ THE WRITE-UP</a>}
+            {!p.videoId && p.href && <a href={p.href}>PAPER ▸</a>}
+          </div>
         </section>
       ))
     }
-
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-lg md:gap-xl items-start">
-      {
-        p1 && (
-          <article class="md:col-span-7 group cursor-pointer flex flex-col gap-md">
-            <a href={p1.href ?? "#"} class="contents">
-              <div class="relative w-full aspect-[4/3] bg-surface-container-low hover:bg-surface-container-high transition-colors duration-500 rounded-3xl overflow-hidden border border-outline-variant/30 flex items-center justify-center p-md">
-                {p1.image ? (
-                  <img alt={p1.title} class="w-full h-full object-cover pebble-shape transition-transform duration-700 group-hover:scale-105" src={p1.image} />
-                ) : (
-                  <Icon name={p1.icon ?? "folder"} class="text-primary/60" size={96} />
-                )}
-              </div>
-              <div class="flex flex-col gap-xs pl-sm">
-                <div class="flex items-center gap-sm">
-                  <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-label-sm">{p1.tag}</span>
-                  {p1.year && <span class="text-outline font-label-sm text-label-sm">{p1.year}</span>}
-                </div>
-                <h2 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors duration-300">{p1.title}</h2>
-                <p class="text-on-surface-variant font-body-md text-body-md max-w-md">{p1.description}</p>
-              </div>
-            </a>
-          </article>
-        )
-      }
-
-      {
-        p2 && (
-          <article class="md:col-span-5 md:mt-24 group cursor-pointer flex flex-col gap-md">
-            <a href={p2.href ?? "#"} class="contents">
-              <div class="relative w-full aspect-square bg-surface-container-high hover:bg-surface-container-highest transition-colors duration-500 rounded-3xl overflow-hidden border border-outline-variant/30 flex items-center justify-center p-md">
-                {p2.image ? (
-                  <img alt={p2.title} class="w-full h-full object-cover pebble-shape-2 transition-transform duration-700 group-hover:scale-105" src={p2.image} />
-                ) : (
-                  <Icon name={p2.icon ?? "folder"} class="text-secondary/60" size={96} />
-                )}
-              </div>
-              <div class="flex flex-col gap-xs pl-sm">
-                <div class="flex items-center gap-sm">
-                  <span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-sm text-label-sm">{p2.tag}</span>
-                  {p2.year && <span class="text-outline font-label-sm text-label-sm">{p2.year}</span>}
-                </div>
-                <h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors duration-300">{p2.title}</h2>
-                <p class="text-on-surface-variant font-body-md text-body-md">{p2.description}</p>
-              </div>
-            </a>
-          </article>
-        )
-      }
-
-      {
-        p3 && (
-          <article class="md:col-span-12 mt-lg md:mt-xl group cursor-pointer flex flex-col md:flex-row gap-lg items-center bg-surface-container-low hover:bg-surface-container-high transition-colors duration-500 rounded-3xl p-lg border border-outline-variant/30 relative overflow-hidden">
-            <div class="absolute -right-20 -top-20 w-64 h-64 bg-primary-container opacity-20 pebble-shape-3 blur-3xl"></div>
-            {p3.image && (
-              <div class="w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:h-[400px] bg-surface-container rounded-2xl overflow-hidden p-sm">
-                <img alt={p3.title} class="w-full h-full object-cover rounded-xl transition-transform duration-700 group-hover:scale-105" src={p3.image} />
-              </div>
-            )}
-            <div class="w-full md:w-1/2 flex flex-col gap-sm z-10">
-              <div class="flex items-center gap-sm mb-xs">
-                <span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full font-label-sm text-label-sm border border-outline/20">{p3.tag}</span>
-                {p3.year && <span class="text-outline font-label-sm text-label-sm">{p3.year}</span>}
-              </div>
-              <h2 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors duration-300">{p3.title}</h2>
-              <p class="text-on-surface-variant font-body-lg text-body-lg mb-sm">{p3.description}</p>
-              <a href={p3.href ?? "#"} class="self-start text-primary font-label-md text-label-md flex items-center gap-xs hover:text-tertiary transition-colors duration-300">
-                View Case Study <Icon name="arrow_forward" size={18} />
-              </a>
-            </div>
-          </article>
-        )
-      }
-
-      {
-        rest.map((p, i) => (
-          <article class="md:col-span-4 group cursor-pointer flex flex-col gap-md">
-            <a href={p.href ?? "#"} class="contents">
-              <div class="relative w-full aspect-[4/3] bg-surface-container-low hover:bg-surface-container-high transition-colors duration-500 rounded-3xl overflow-hidden border border-outline-variant/30 flex items-center justify-center p-md">
-                {p.image ? (
-                  <img alt={p.title} class:list={["w-full h-full object-cover transition-transform duration-700 group-hover:scale-105", pebble[i % 3]]} src={p.image} />
-                ) : (
-                  <Icon name={p.icon ?? "folder"} class="text-primary/60" size={80} />
-                )}
-              </div>
-              <div class="flex flex-col gap-xs pl-sm">
-                <div class="flex items-center gap-sm">
-                  <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-label-sm">{p.tag}</span>
-                  {p.year && <span class="text-outline font-label-sm text-label-sm">{p.year}</span>}
-                </div>
-                <h2 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors duration-300">{p.title}</h2>
-                <p class="text-on-surface-variant font-body-md text-body-md">{p.description}</p>
-              </div>
-            </a>
-          </article>
-        ))
-      }
-    </div>
   </div>
 </BaseLayout>
+
+<style>
+  .ledger {
+    margin: 8px 0 34px;
+  }
+  .dossier {
+    padding: 48px 0;
+    border-top: 3px double var(--line-strong);
+  }
+  .dossier h2 {
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 6px;
+  }
+  .dossier-line {
+    font-size: 10.5px;
+    color: var(--meta);
+    letter-spacing: 0.08em;
+    margin-bottom: 22px;
+  }
+  .dossier-desc {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--sub);
+    line-height: 1.7;
+    max-width: 64ch;
+    margin: 30px 0 0;
+  }
+  .datasheet {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+  }
+  .datasheet td {
+    padding: 11px 16px 11px 0;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .datasheet .lbl {
+    width: 30%;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--meta);
+    white-space: nowrap;
+  }
+  .datasheet .detail {
+    color: var(--sub);
+    line-height: 1.6;
+    padding-right: 0;
+  }
+  .dossier-links {
+    margin-top: 24px;
+    display: flex;
+    gap: 22px;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+  }
+  .dossier-links a {
+    color: var(--signal);
+  }
+  .dossier-links a:hover {
+    color: var(--signal-bright);
+  }
+</style>
