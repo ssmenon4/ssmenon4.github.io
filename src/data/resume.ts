@@ -29,12 +29,14 @@ export const experience: Entry[] = [
     role: "Founding Engineer — AI",
     org: "OnFinance AI",
     period: "Sep 2023 - Mar 2024",
+    icon: "hub",
     summary:
-      "Worked on LLMs as orchestrators for retrieval, LLM-powered code generation, optimal knowledge representation of narrow-domain data, and knowledge graphs.",
+      "Built the retrieval/RAG side end-to-end — ingestion, indexing, retrieval, reranking, generation — and drove the applied research on retrieval quality.",
     highlights: [
-      "Built end-to-end pipelines for data pre-processing, ingestion, retrieval, post-processing, and indexing for RAG algorithms.",
-      "Created Conversational AI product demos for clients like NSE, later converted into product deployments at scale.",
-      "Coordinated with the DevOps team to improve the efficiency of integrating Gen AI applications by 33%.",
+      "Shipped RAG document-QA pipelines for 10+ financial-sector clients (Kotak, ICICI, IBSFintech, Nuvama/Edelweiss, Oister, NSE); LetsVenture converted to a contracted production deployment.",
+      "Lifted top-1 retrieval recall 25% → 90% on an internal FAQ set via question-embedding indexing; cut query latency up to 75% with chunk-budget tuning and a cost-aware GPT-4-Turbo/3.5 switch.",
+      "Two-stage retrieval — broad first pass, then a more accurate re-rank; GPT-4V + Azure Document Intelligence to read tables and charts OCR missed; chat memory for follow-up context.",
+      "Led retrieval-quality research — entity-attribute question generation, atomicity-based chunking, Bloom-tier answer routing — later distilled into a public writeup series.",
     ],
   },
   {
