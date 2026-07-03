@@ -3,7 +3,11 @@ title: "RAG, Revisited"
 description: "Five field notes from building retrieval systems in 2023–24, each held against the 2026 canon — what I got right, what I got wrong, and what the field had already quietly published. Start here."
 date: 2026-06-30
 category: "Retrieval"
-image: "/blog/hero-revisited.png"
+image: "/blog/hero-revisited.jpg"
+heroKicker: "RAG · REVISITED · Nº 00"
+heroPhrase: "Field notes, re-read."
+heroTagline: "Right instincts. Credit already taken."
+heroCredit: 'Photo by <a href="https://unsplash.com/@kelsymichael?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kelsy Gagnebin</a> on <a href="https://unsplash.com/photos/text-letter-vFGKVYcTFE8?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
 featured: true
 series: "rag-revisited"
 order: 0

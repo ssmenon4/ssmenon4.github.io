@@ -3,7 +3,11 @@ title: "When Your Embedder Thinks Everything Is a Finance Question"
 description: "Inside a single domain, generalist embedders lose contrast — everything scores 0.8 and top-k goes nearly random. Here's why that happens, why a reranker fixes it, and what I'd do differently in 2026."
 date: 2026-06-19
 category: "Retrieval"
-image: "/blog/hero-domaincollapse.png"
+image: "/blog/hero-domaincollapse.jpg"
+heroKicker: "RAG · REVISITED · Nº 03"
+heroPhrase: "Everything scores 0.8."
+heroTagline: "In one domain, an embedder loses contrast."
+heroCredit: 'Photo by <a href="https://unsplash.com/@samuelgirven?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Girven</a> on <a href="https://unsplash.com/photos/a-pile-of-golf-balls-in-a-bin-wmYTYa4mlDA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
 series: "rag-revisited"
 order: 3
 ---

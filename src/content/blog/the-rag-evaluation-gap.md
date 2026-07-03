@@ -3,7 +3,11 @@ title: "Good Idea, Good Result: The RAG Evaluation Gap"
 description: "After re-reading six months of my own RAG notes, the pattern was clear: the ideas were fine, the evaluation wasn't. Here's the gap between a promising RAG idea and a credible one — and the cheap checklist that closes it."
 date: 2026-06-27
 category: "ML Engineering"
-image: "/blog/hero-evalgap.png"
+image: "/blog/hero-evalgap.jpg"
+heroKicker: "RAG · REVISITED · Nº 05"
+heroPhrase: "Rigor is the moat."
+heroTagline: "The idea is the easy part."
+heroCredit: 'Photo by <a href="https://unsplash.com/@balam15?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Amir Balam</a> on <a href="https://unsplash.com/photos/graphical-user-interface-X0S02vLrZEs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
 series: "rag-revisited"
 order: 5
 ---

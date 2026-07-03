@@ -3,7 +3,11 @@ title: "Routing RAG by Question Complexity: A Bloom-Taxonomy Lens"
 description: "Single-shot and decompose-first RAG fail on different kinds of questions — and the reason maps cleanly onto Bloom's taxonomy. A field note from 2024, corrected by what the field published since."
 date: 2026-06-23
 category: "Retrieval"
-image: "/blog/hero-routing.png"
+image: "/blog/hero-routing.jpg"
+heroKicker: "RAG · REVISITED · Nº 04"
+heroPhrase: "Route by complexity."
+heroTagline: "Two strategies, opposite ends of the ladder."
+heroCredit: 'Photo by <a href="https://unsplash.com/@bdchu614?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Brendan Church</a> on <a href="https://unsplash.com/photos/white-and-black-one-way-printed-road-signages-pKeF6Tt3c08?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
 featured: true
 series: "rag-revisited"
 order: 4

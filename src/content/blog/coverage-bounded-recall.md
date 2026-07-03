@@ -3,7 +3,11 @@ title: "You Can't Retrieve What You Didn't Index: Coverage-Bounded Recall"
 description: "In a query-indexed store, retrieval recall is capped by how completely you represent each chunk — no reranker downstream can recover what the representation left out. A 2023 instinct, and the 2026 correction."
 date: 2026-06-15
 category: "Retrieval"
-image: "/blog/hero-coverage.png"
+image: "/blog/hero-coverage.jpg"
+heroKicker: "RAG · REVISITED · Nº 02"
+heroPhrase: "Indexed, or invisible."
+heroTagline: "You can't retrieve what you didn't index."
+heroCredit: 'Photo by <a href="https://unsplash.com/@grimnir35mm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Anthony Robinson</a> on <a href="https://unsplash.com/photos/a-white-deer-stands-in-a-dense-forest-5geJuI_DdxU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
 series: "rag-revisited"
 order: 2
 ---

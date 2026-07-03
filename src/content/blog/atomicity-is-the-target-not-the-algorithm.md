@@ -3,7 +3,11 @@ title: "Atomicity Is the Target, Not the Algorithm: Chunking in 2026"
 description: "'Chunk on information atomicity' is the right objective and a useless instruction — it's a definition, not a procedure. Here's the gap I fell into in 2023, and the algorithms the field built to actually hit the target."
 date: 2026-06-11
 category: "Retrieval"
-image: "/blog/hero-atomicity.png"
+image: "/blog/hero-atomicity.jpg"
+heroKicker: "RAG · REVISITED · Nº 01"
+heroPhrase: "Where you put the knife."
+heroTagline: "Atomicity is a target, not an algorithm."
+heroCredit: 'Photo by <a href="https://unsplash.com/@vanburn?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vanburn Gonsalves</a> on <a href="https://unsplash.com/photos/a-rusty-utility-knife-on-an-open-book-9tHdJFVccbY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
 series: "rag-revisited"
 order: 1
 ---

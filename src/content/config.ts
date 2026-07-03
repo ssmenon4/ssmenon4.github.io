@@ -17,6 +17,13 @@ const blog = defineCollection({
     // social preview, not as an in-article hero (the diagram is placed inline
     // instead). Suppresses the top-of-article hero render.
     hideHero: z.boolean().default(false),
+    // Optional hero overlay: when the hero `image` is a photo, these render a
+    // magazine-style caption bar over it (webpage-only, not baked into the file).
+    // `heroCredit` may contain HTML (e.g. Unsplash attribution links).
+    heroKicker: z.string().optional(),
+    heroPhrase: z.string().optional(),
+    heroTagline: z.string().optional(),
+    heroCredit: z.string().optional(),
     // Series grouping: `series` is a shared slug; `order` sets reading order,
     // with the hub/overview post at order 0 and parts numbered from 1.
     series: z.string().optional(),

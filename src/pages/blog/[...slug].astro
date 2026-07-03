@@ -33,9 +33,32 @@ const fmt = (d: Date) =>
 
     {
       post.data.image && !post.data.hideHero && (
-        <div class="w-full aspect-[16/9] rounded-xl overflow-hidden mb-xl bg-surface-container">
-          <img alt={post.data.title} class="w-full h-full object-cover pebble-shape" src={post.data.image} />
-        </div>
+        post.data.heroPhrase || post.data.heroCredit ? (
+          <figure class="mb-xl">
+            <div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-surface-container">
+              <img alt={post.data.title} class="absolute inset-0 w-full h-full object-cover" src={post.data.image} />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5"></div>
+              <div class="absolute inset-x-0 bottom-0 p-md md:p-lg">
+                {post.data.heroKicker && (
+                  <p class="font-label-md text-label-md uppercase tracking-[0.22em] text-white/75 mb-xs drop-shadow">{post.data.heroKicker}</p>
+                )}
+                {post.data.heroPhrase && (
+                  <h2 class="font-headline-md text-headline-md md:font-display-lg md:text-display-lg text-white drop-shadow-lg">{post.data.heroPhrase}</h2>
+                )}
+                {post.data.heroTagline && (
+                  <p class="font-body-lg text-body-lg italic text-white/85 mt-xs drop-shadow">{post.data.heroTagline}</p>
+                )}
+              </div>
+            </div>
+            {post.data.heroCredit && (
+              <figcaption class="hero-credit mt-sm font-label-sm text-label-sm text-outline" set:html={post.data.heroCredit} />
+            )}
+          </figure>
+        ) : (
+          <div class="w-full aspect-[16/9] rounded-xl overflow-hidden mb-xl bg-surface-container">
+            <img alt={post.data.title} class="w-full h-full object-cover pebble-shape" src={post.data.image} />
+          </div>
+        )
       )
     }
 
@@ -48,6 +71,13 @@ const fmt = (d: Date) =>
 </BaseLayout>
 
 <style is:global>
+  /* Hero photo-credit caption: underline the attribution links */
+  .hero-credit a {
+    color: rgb(var(--color-primary));
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
   /* Lightweight typographic styling for rendered Markdown */
   .prose-portfolio :is(h1, h2, h3, h4) {
     font-family: "Plus Jakarta Sans", sans-serif;
