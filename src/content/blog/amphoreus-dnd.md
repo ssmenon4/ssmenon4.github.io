@@ -4,7 +4,6 @@ description: "A fully automated multi-agent LLM simulation of a D&D campaign —
 date: 2026-07-02
 category: "AI Engineering"
 featured: true
-image: "/projects/Amphoreus.jpeg"
 draft: false
 ---
 
