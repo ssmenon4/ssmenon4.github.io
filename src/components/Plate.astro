@@ -1,0 +1,11 @@
+---
+interface Props { caption: string; full?: boolean }
+const { caption } = Astro.props;
+---
+<figure class="plate-fig">
+  <div class="plate"><slot /></div>
+  <figcaption class="plate-cap" set:html={caption} />
+</figure>
+<style>
+  .plate-fig{ margin:0; }
+</style>

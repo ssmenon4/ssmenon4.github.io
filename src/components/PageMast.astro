@@ -1,0 +1,12 @@
+---
+import { site } from "../config/site";
+
+interface Props { crumb: string; title: string; sub?: string; kv?: string }
+const { crumb, title, sub, kv } = Astro.props;
+---
+<div class="pagemast">
+  <div class="crumb mono">{site.brand.toUpperCase()} / <b>{crumb}</b></div>
+  <h1>{title}</h1>
+  {sub && <p class="sub">{sub}</p>}
+  {(kv || Astro.slots.has("kv")) && <div class="kv mono">{kv}<slot name="kv" /></div>}
+</div>
