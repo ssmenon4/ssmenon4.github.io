@@ -21,10 +21,11 @@ export const site = {
 
 /** Primary navigation. `href` values map to real routes. */
 export const nav = [
-  { label: "Projects", href: "/projects" },
-  { label: "Resume", href: "/resume" },
-  { label: "Publications", href: "/publications" },
-  { label: "Blog", href: "/blog" },
+  { label: "WORK", href: "/projects" },
+  { label: "WRITING", href: "/blog" },
+  { label: "PAPERS", href: "/publications" },
+  { label: "RESUME", href: "/resume" },
+  { label: "ABOUT", href: "/about" },
 ];
 
 /** Social links shown in the footer. Remove any you don't use. */

@@ -1,101 +1,13 @@
 ---
 import { site, nav } from "../config/site";
-import Icon from "./Icon.astro";
 import ThemeToggle from "./ThemeToggle.astro";
-
-const path = Astro.url.pathname.replace(/\/$/, "") || "/";
-const isActive = (href: string) =>
-  href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
 ---
-
-<nav id="site-nav" class="w-full sticky top-0 z-50">
-  <div class="flex justify-between items-center h-20 px-gutter max-w-container-max mx-auto">
-    <a class="text-headline-md font-headline-md text-primary tracking-tight" href="/">{site.brand}</a>
-
-    <ul class="hidden md:flex space-x-lg font-label-md text-label-md">
-      {
-        nav.map((item) => (
-          <li>
-            <a
-              class:list={[
-                "pb-1 transition-colors duration-300",
-                isActive(item.href)
-                  ? "text-primary border-b-2 border-primary"
-                  : "text-on-surface-variant hover:text-primary",
-              ]}
-              href={item.href}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-
-    <div class="flex items-center gap-sm md:gap-md">
+<header class="page">
+  <div class="top">
+    <a class="name" href="/">{site.brand}</a>
+    <nav>
+      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
       <ThemeToggle />
-      <a
-        href={`mailto:${site.email}`}
-        class="hidden md:inline-flex items-center justify-center bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-lg scale-95 hover:scale-100 transition-transform duration-300 ease-in-out"
-      >
-        Contact Me
-      </a>
-      <button
-        class="md:hidden text-primary flex items-center justify-center p-2"
-        id="mobile-menu-btn"
-        aria-label="Open menu"
-        aria-expanded="false"
-      >
-        <Icon name="menu" fill={0} />
-      </button>
-    </div>
+    </nav>
   </div>
-
-  <!-- Mobile menu -->
-  <div
-    id="mobile-menu"
-    class="hidden md:hidden border-t border-outline-variant/40 bg-background/95 backdrop-blur-sm"
-  >
-    <ul class="flex flex-col px-gutter py-md gap-sm font-label-md text-label-md">
-      {
-        nav.map((item) => (
-          <li>
-            <a
-              class:list={[
-                "block py-sm transition-colors",
-                isActive(item.href) ? "text-primary" : "text-on-surface-variant hover:text-primary",
-              ]}
-              href={item.href}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))
-      }
-      <li>
-        <a class="block py-sm text-primary font-label-md" href={`mailto:${site.email}`}>Contact Me</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<script is:inline>
-  (() => {
-    const btn = document.getElementById("mobile-menu-btn");
-    const menu = document.getElementById("mobile-menu");
-    if (btn && menu) {
-      btn.addEventListener("click", () => {
-        const open = menu.classList.toggle("hidden");
-        btn.setAttribute("aria-expanded", String(!open));
-      });
-    }
-
-    // Transparent over the hero; solidify into an opaque bar once scrolled.
-    const nav = document.getElementById("site-nav");
-    if (nav) {
-      const onScroll = () => nav.classList.toggle("nav-scrolled", window.scrollY > 10);
-      onScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
-    }
-  })();
-</script>
+</header>

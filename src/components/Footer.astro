@@ -1,30 +1,10 @@
 ---
 import { site, socials } from "../config/site";
-const year = new Date().getFullYear();
 ---
-
-<footer class="w-full py-xl bg-surface-container mt-xl border-t border-outline-variant/30 transition-colors duration-500">
-  <div class="flex flex-col md:flex-row justify-between items-center gap-md px-gutter max-w-container-max mx-auto">
-    <div class="text-headline-sm font-headline-sm text-secondary dark:text-on-secondary-container transition-colors duration-500">
-      {site.brand}
-    </div>
-    <div class="font-label-sm text-label-sm text-on-surface-variant order-last md:order-none">
-      © {year} {site.author}. {site.footerNote}
-    </div>
-    <ul class="flex space-x-md font-label-sm text-label-sm text-secondary dark:text-on-secondary-container transition-colors duration-500">
-      {
-        socials.map((s) => (
-          <li>
-            <a
-              class="opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300"
-              href={s.href}
-              {...(s.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            >
-              {s.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
+<footer class="page-footer">
+  <span>© {new Date().getFullYear()} {site.author.toUpperCase()} · BUILT WITH CURIOSITY</span>
+  <span>
+    {socials.map((s, i) => <>{i > 0 && " · "}<a href={s.href}>{s.label.toUpperCase()}</a></>)}
+  </span>
+  <span>SET IN NEWSREADER &amp; JETBRAINS MONO · RENDERED BY ASTRO · σ=10 ρ=28 β=8/3</span>
 </footer>
