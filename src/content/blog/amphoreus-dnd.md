@@ -36,6 +36,8 @@ To me the point wasn't whether I can build features. It was whether I can build 
 
 ## The architecture that makes it measurable
 
+![The 4-stroke engine loop: Stroke 1 the DM narrates and resolves, Stroke 2 the Orchestrator canonizes and contacts relevant players, Stroke 3 players reason in parallel and commit an intent, Stroke 4 the Orchestrator admits/rejects, rolls dice and finalizes — then back to the DM. Every state change is a typed tool call written to a durable event log and typed, owned stores (the Library and player memory vector-indexed in ChromaDB); agents pull the context they need by semantic search or direct recall rather than receiving bulk dumps](/blog/agent-architecture.svg)
+
 A few decisions carry the weight, and each one exists partly to keep the system *legible*:
 
 - **Three roles, enforced by tools — not by prompts.** The DM creates and resolves; the Orchestrator referees and routes but cannot create; players declare intent but don't resolve their own actions. The boundary that matters is "I want to do X" versus "X happens." And it holds because each agent can only affect the world through specific, typed **tool calls**. The Orchestrator can't accidentally invent lore — it has no tool to. Prompt-only negatives like "you must not" are merely suggestions; a missing tool is not.
