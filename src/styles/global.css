@@ -40,16 +40,25 @@ h1,h2,h3,h4{ font-weight:400; text-wrap:balance; }
 .link-highlight{ color:var(--signal); }
 
 /* ---------- top bar ---------- */
-.top{ display:flex; justify-content:space-between; align-items:baseline; padding:26px 0 0; font-size:12px; }
-.top .name{ font-size:15px; letter-spacing:.01em; }
-.top nav{ display:flex; gap:26px; }
+.top{ display:flex; justify-content:space-between; align-items:baseline; padding:26px 0 0; font-size:12px; flex-wrap:wrap; row-gap:10px; }
+.top .name{ font-size:15px; letter-spacing:.01em; border-bottom:1px solid transparent; padding-bottom:1px; }
+.top .name:hover{ color:var(--signal); border-bottom-color:var(--signal); }
+.top .name .home-hint{ font-size:9px; letter-spacing:.14em; color:var(--meta); margin-left:8px;
+    opacity:0; transition:opacity .15s ease; }
+.top .name:hover .home-hint, .top .name:focus-visible .home-hint{ opacity:1; color:var(--signal); }
+.top nav{ display:flex; gap:26px; flex-wrap:wrap; row-gap:10px; }
 .top nav a{ font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; color:var(--meta); }
 .top nav a:hover{ color:var(--signal); }
 
+/* obvious download affordance — bordered pill in the signal color */
+.pdf-btn{ display:inline-block; border:1px solid var(--signal); color:var(--signal);
+    padding:5px 12px; margin-left:4px; letter-spacing:.12em; }
+.pdf-btn:hover{ background:var(--signal); color:var(--bg); }
+
 /* ---------- masthead ---------- */
 .mast{ position:relative; padding:88px 0 64px; border-bottom:1px solid var(--line); }
-.mast canvas{ position:absolute; right:-40px; top:6px; width:430px; height:330px; pointer-events:none; opacity:.9; }
-.mast-fig{ position:absolute; right:-40px; top:6px; width:430px; height:330px; pointer-events:none; opacity:.9; z-index:1; }
+.mast canvas{ position:absolute; right:-40px; top:6px; width:430px; height:330px; opacity:.9; }
+.mast-fig{ position:absolute; right:-40px; top:6px; width:430px; height:330px; opacity:.9; z-index:1; }
 .mast .cap{ position:absolute; right:0; bottom:18px; font-size:10px; color:var(--meta); letter-spacing:.04em; }
 .mast .cap .dot{ color:var(--signal); }
 h1{ font-weight:400; font-size:clamp(30px,4.6vw,44px); line-height:1.24; letter-spacing:-.008em;
@@ -177,6 +186,8 @@ section{ padding:56px 0 8px; }
 .skillrow .g{ color:var(--meta); } .skillrow .i{ color:var(--sub); line-height:1.9; }
 
 @media (max-width:720px){
+  .top{ padding-top:18px; }
+  .top nav{ gap:14px 18px; }
   .cv,.skillrow{ grid-template-columns:1fr; }
   .ledger .f{ display:none; }
   .wpost{ grid-template-columns:44px 1fr; }
@@ -217,6 +228,9 @@ section{ padding:56px 0 8px; }
 .prose-journal thead th{ text-align:left; font-family:var(--font-sans); border-bottom:1px solid var(--line-strong); padding:.55em .9em; }
 .prose-journal tbody td{ border-bottom:1px solid var(--line); padding:.55em .9em; vertical-align:top; }
 article img{ border:1px solid var(--line-strong); }
+/* body images arrive pre-framed by rehype-plate-figures — plate carries the border */
+.prose-journal .plate-fig{ margin:1.8em 0; }
+.prose-journal .plate img{ border:0; display:block; width:100%; height:auto; }
 
 /* series nav — hairline rows, no pills/cards */
 .series-nav{ margin-top:48px; padding-top:2px; border-top:3px double var(--line-strong);

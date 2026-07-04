@@ -3,12 +3,12 @@ import { site, nav } from "../config/site";
 import ThemeToggle from "./ThemeToggle.astro";
 ---
 <header class="page flex justify-center py-4">
-  <div class="top flex items-center gap-12">
+  <div class="top flex items-center gap-6 sm:gap-12 flex-wrap">
     <!-- Brand Name -->
-    <a class="name whitespace-nowrap" href="/">{site.brand}</a>
-    
+    <a class="name whitespace-nowrap" href="/" aria-label="Home — Shivashankar Menon">{site.brand}<span class="home-hint mono" aria-hidden="true">~ HOME</span></a>
+
     <!-- Navigation Links -->
-    <nav class="flex items-center gap-6">
+    <nav class="flex items-center gap-6 flex-wrap">
       {nav.map((n) => <a href={n.href}>{n.label}</a>)}
       <ThemeToggle />
     </nav>

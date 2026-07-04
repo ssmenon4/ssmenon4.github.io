@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
+import rehypePlateFigures from "./src/lib/rehype-plate-figures.mjs";
 
 // Your GitHub Pages user site. If you later move to a custom domain,
 // change this to e.g. "https://your-domain.com".
@@ -10,4 +11,7 @@ export default defineConfig({
   site: SITE,
   // User site (ssmenon4.github.io) is served at the root, so no `base` needed.
   integrations: [tailwind(), sitemap()],
+  markdown: {
+    rehypePlugins: [rehypePlateFigures],
+  },
 });

@@ -68,13 +68,6 @@ const posterSrc = poster ?? `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg
     color: var(--signal);
     font-size: 18px;
   }
-  .video-embed iframe {
-    display: block;
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 16 / 9;
-    border: 0;
-  }
 </style>
 
 <script>
@@ -92,6 +85,9 @@ const posterSrc = poster ?? `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg
         iframe.title = title;
         iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
         iframe.allowFullscreen = true;
+        // Astro's scoped styles can't reach a runtime-created element, so the
+        // iframe would collapse to the 300x150 default without inline sizing.
+        iframe.style.cssText = "display:block; width:100%; aspect-ratio:16/9; border:0;";
         // Remove the entire duotoned facade (poster, overlay, play affordance)
         // together so the injected iframe plays completely unfiltered.
         facade.replaceWith(iframe);

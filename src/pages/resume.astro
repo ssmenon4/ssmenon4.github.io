@@ -17,7 +17,7 @@ const revised = new Date(lastCommitISO)
         LAST REVISED {revised}
         {resumePdf && (
           <>
-            {" "}· <a href={resumePdf}>PDF ↓</a>
+            {" "}· <a class="pdf-btn" href={resumePdf} download>DOWNLOAD PDF ↓</a>
           </>
         )}
       </Fragment>
