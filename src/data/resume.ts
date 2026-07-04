@@ -7,7 +7,6 @@ export type Entry = {
   summary: string;
   highlights?: string[];
   tag?: string; // small badge label, e.g. "Independent Pursuit"
-  icon?: string; // Material Symbol name for the timeline dot
 };
 
 export const experience: Entry[] = [
@@ -16,7 +15,6 @@ export const experience: Entry[] = [
     org: "Self-Directed",
     period: "2024 – 2026",
     tag: "Independent Pursuit",
-    icon: "menu_book",
     summary:
       "A focused, self-directed chapter spent preparing for India's Civil Services (UPSC) examination. I built a holistic understanding of current and historical socio-economic issues, the digital divide, and the scope for AI across Indian industries. Extensive research into public policy and governance sharpened how I analyse complex, real-world problems.",
     highlights: [
@@ -29,7 +27,6 @@ export const experience: Entry[] = [
     role: "Founding Engineer — AI",
     org: "OnFinance AI",
     period: "Sep 2023 - Mar 2024",
-    icon: "hub",
     summary:
       "Built the retrieval/RAG side end-to-end — ingestion, indexing, retrieval, reranking, generation — and drove the applied research on retrieval quality.",
     highlights: [

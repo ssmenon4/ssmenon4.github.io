@@ -1,8 +1,7 @@
 /**
  * Your projects. The first three are featured on the homepage;
  * all of them appear on /projects.
- * `image` can be any URL or a path under /public. If you omit `image`,
- * the card falls back to the Material Symbol named in `icon`.
+ * `image` can be any URL or a path under /public.
  */
 export type Project = {
   title: string;
@@ -10,8 +9,6 @@ export type Project = {
   year?: string;
   description: string;
   image?: string;
-  /** Material Symbol name used when there's no image (e.g. "route"). */
-  icon?: string;
   href?: string;
   featured?: boolean;
   /** Anchor id for the inline demo-video section on /projects (e.g. "my-demo"). */
