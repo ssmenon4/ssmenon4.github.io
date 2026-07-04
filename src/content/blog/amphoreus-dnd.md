@@ -10,7 +10,7 @@ draft: false
 *<a class="link-highlight" href="/projects#amphoreus-dnd">See it run here</a>.*
 
 
-Getting an LLM to do one impressive thing is easy. Getting a *system* of independent LLM agents to stay coherent over dozens of turns — to plan, remember what they committed to, and adapt as the situation changes under them — is the hard part. That gap is the whole problem this project takes on.
+Getting an LLM to do one impressive thing is easy. Getting a *system* of independent LLM agents to stay coherent over dozens of turns — to plan, remember what they committed to, and adapt as the situation changes under them — is the hard part. That gap is the whole problem that this project takes on.
 
 The setting is a Dungeons & Dragons campaign, run with no human at the table. There is a **Dungeon Master** who narrates and resolves the world, an **Orchestrator** that referees and routes, and a cast of **player-characters** — each one an LLM, each exploring and acting on a world that shifts with every choice. A structured engine loop drives every turn. But the campaign is really a test environment: a long-running, dynamic world is exactly where short-horizon tricks fall apart, which makes it the right place to study agent behavior over time.
 
