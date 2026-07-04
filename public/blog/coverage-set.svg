@@ -6,16 +6,16 @@
   </defs>
   <rect x="1" y="1" width="1198" height="673" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="2"/>
 
-  <text x="56" y="66" fill="#7a7365" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="3">COVERAGE-BOUNDED RECALL</text>
+  <text x="56" y="66" fill="#7a7365" font-family="Menlo, monospace" font-size="12" font-weight="700" letter-spacing="3">COVERAGE-BOUNDED RECALL</text>
   <text x="56" y="108" fill="#211f1b" font-size="32" font-weight="700">You can't retrieve what you didn't index.</text>
 
   <!-- the chunk -->
   <rect x="80" y="150" width="700" height="380" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="2"/>
-  <text x="104" y="184" fill="#5f594e" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="0.5">ONE CHUNK &#8212; a set of answerable facts</text>
+  <text x="104" y="184" fill="#5f594e" font-family="Menlo, monospace" font-size="12" font-weight="700" letter-spacing="0.5">ONE CHUNK &#8212; a set of answerable facts</text>
 
   <!-- covered region -->
   <path d="M150 250 C118 250 120 470 172 486 C360 520 520 480 540 388 C556 300 448 236 300 240 C236 240 196 244 150 250 Z"
-        fill="#dde9df" stroke="#3d6b4f" stroke-width="2" stroke-dasharray="8 6"/>
+        fill="#3d6b4f" fill-opacity="0.12" stroke="#3d6b4f" stroke-width="2" stroke-dasharray="8 6"/>
   <text x="300" y="300" text-anchor="middle" fill="#3d6b4f" font-size="16" font-weight="700">indexed representation</text>
   <text x="300" y="322" text-anchor="middle" fill="#5f594e" font-family="Menlo, monospace" font-size="12" letter-spacing="0.3">the facts your embedding actually encodes</text>
 

@@ -6,7 +6,7 @@
   </defs>
   <rect x="1" y="1" width="1198" height="673" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="2"/>
 
-  <text x="56" y="60" fill="#7a7365" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="3">ROUTING &#183; QUESTION COMPLEXITY</text>
+  <text x="56" y="60" fill="#7a7365" font-family="Menlo, monospace" font-size="12" font-weight="700" letter-spacing="3">ROUTING &#183; QUESTION COMPLEXITY</text>
   <text x="56" y="100" fill="#211f1b" font-size="30" font-weight="700">Two strategies, opposite ends of Bloom's ladder.</text>
 
   <!-- router -->
@@ -15,11 +15,11 @@
 
   <!-- cognitive demand axis -->
   <line x1="120" y1="560" x2="120" y2="212" stroke="#7a7365" stroke-width="2" marker-end="url(#br-arrow)"/>
-  <text x="106" y="386" fill="#5f594e" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="0.5" transform="rotate(-90 106 386)" text-anchor="middle">cognitive demand</text>
+  <text x="106" y="386" fill="#5f594e" font-family="Menlo, monospace" font-size="12" font-weight="700" letter-spacing="0.5" transform="rotate(-90 106 386)" text-anchor="middle">cognitive demand</text>
 
   <!-- column headers -->
-  <text x="470" y="200" text-anchor="middle" fill="#5f594e" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="0.5">Single-shot</text>
-  <text x="730" y="200" text-anchor="middle" fill="#5f594e" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="0.5">Decompose-first</text>
+  <text x="470" y="200" text-anchor="middle" fill="#5f594e" font-family="Menlo, monospace" font-size="12" font-weight="700" letter-spacing="0.5">Single-shot</text>
+  <text x="730" y="200" text-anchor="middle" fill="#5f594e" font-family="Menlo, monospace" font-size="12" font-weight="700" letter-spacing="0.5">Decompose-first</text>
 
   <!-- tiers: top = Create ... bottom = Remember -->
   <g>
@@ -33,7 +33,7 @@
     <rect x="300" y="328" width="600" height="50" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="1.5"/>
     <text x="600" y="359" text-anchor="middle" fill="#211f1b" font-size="18" font-weight="600">Analyze</text>
     <!-- Apply (contested) -->
-    <rect x="300" y="386" width="600" height="50" rx="0" fill="#f2ead2" stroke="#996b16" stroke-width="1.5"/>
+    <rect x="300" y="386" width="600" height="50" rx="0" fill="#996b16" fill-opacity="0.14" stroke="#996b16" stroke-width="1.5"/>
     <text x="600" y="417" text-anchor="middle" fill="#211f1b" font-size="18" font-weight="600">Apply</text>
     <!-- Understand -->
     <rect x="300" y="444" width="600" height="50" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="1.5"/>
@@ -46,32 +46,32 @@
   <!-- badges: S at x=400, D at x=800; check green, cross rust, tilde amber -->
   <g>
     <!-- Create -->
-    <g transform="translate(400,237)"><circle r="16" fill="#f2ded9"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
-    <g transform="translate(800,237)"><circle r="16" fill="#dde9df"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(400,237)"><circle r="16" fill="#8a3b2e" fill-opacity="0.12"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(800,237)"><circle r="16" fill="#3d6b4f" fill-opacity="0.12"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
     <!-- Evaluate -->
-    <g transform="translate(400,295)"><circle r="16" fill="#f2ded9"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
-    <g transform="translate(800,295)"><circle r="16" fill="#dde9df"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(400,295)"><circle r="16" fill="#8a3b2e" fill-opacity="0.12"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(800,295)"><circle r="16" fill="#3d6b4f" fill-opacity="0.12"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
     <!-- Analyze -->
-    <g transform="translate(400,353)"><circle r="16" fill="#f2ded9"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
-    <g transform="translate(800,353)"><circle r="16" fill="#dde9df"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(400,353)"><circle r="16" fill="#8a3b2e" fill-opacity="0.12"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(800,353)"><circle r="16" fill="#3d6b4f" fill-opacity="0.12"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
     <!-- Apply (both ~) -->
-    <g transform="translate(400,411)"><circle r="16" fill="#f2ead2"/><path d="M-7 0 L7 0" stroke="#996b16" stroke-width="3" stroke-linecap="round"/></g>
-    <g transform="translate(800,411)"><circle r="16" fill="#f2ead2"/><path d="M-7 0 L7 0" stroke="#996b16" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(400,411)"><circle r="16" fill="#996b16" fill-opacity="0.14"/><path d="M-7 0 L7 0" stroke="#996b16" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(800,411)"><circle r="16" fill="#996b16" fill-opacity="0.14"/><path d="M-7 0 L7 0" stroke="#996b16" stroke-width="3" stroke-linecap="round"/></g>
     <!-- Understand -->
-    <g transform="translate(400,469)"><circle r="16" fill="#dde9df"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
-    <g transform="translate(800,469)"><circle r="16" fill="#f2ded9"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(400,469)"><circle r="16" fill="#3d6b4f" fill-opacity="0.12"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(800,469)"><circle r="16" fill="#8a3b2e" fill-opacity="0.12"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
     <!-- Remember -->
-    <g transform="translate(400,527)"><circle r="16" fill="#dde9df"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
-    <g transform="translate(800,527)"><circle r="16" fill="#f2ded9"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(400,527)"><circle r="16" fill="#3d6b4f" fill-opacity="0.12"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(800,527)"><circle r="16" fill="#8a3b2e" fill-opacity="0.12"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
   </g>
 
   <!-- legend -->
   <g font-family="Menlo, monospace" font-size="12" letter-spacing="0.3">
-    <g transform="translate(468,624)"><circle r="11" fill="#dde9df"/><path d="M-5 1 L-1 5 L6 -5" fill="none" stroke="#3d6b4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(468,624)"><circle r="11" fill="#3d6b4f" fill-opacity="0.12"/><path d="M-5 1 L-1 5 L6 -5" fill="none" stroke="#3d6b4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
     <text x="486" y="628" fill="#5f594e">wins</text>
-    <g transform="translate(560,624)"><circle r="11" fill="#f2ead2"/><path d="M-5 0 L5 0" stroke="#996b16" stroke-width="2.5" stroke-linecap="round"/></g>
+    <g transform="translate(560,624)"><circle r="11" fill="#996b16" fill-opacity="0.14"/><path d="M-5 0 L5 0" stroke="#996b16" stroke-width="2.5" stroke-linecap="round"/></g>
     <text x="578" y="628" fill="#5f594e">either</text>
-    <g transform="translate(662,624)"><circle r="11" fill="#f2ded9"/><path d="M-5 -5 L5 5 M5 -5 L-5 5" stroke="#8a3b2e" stroke-width="2.5" stroke-linecap="round"/></g>
+    <g transform="translate(662,624)"><circle r="11" fill="#8a3b2e" fill-opacity="0.12"/><path d="M-5 -5 L5 5 M5 -5 L-5 5" stroke="#8a3b2e" stroke-width="2.5" stroke-linecap="round"/></g>
     <text x="680" y="628" fill="#5f594e">fails</text>
   </g>
 </svg>

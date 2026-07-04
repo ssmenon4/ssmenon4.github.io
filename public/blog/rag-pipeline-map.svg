@@ -7,7 +7,7 @@
   <rect x="1" y="1" width="1198" height="673" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="2"/>
 
   <!-- header -->
-  <text x="56" y="70" fill="#7a7365" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="3">RAG &#183; REVISITED</text>
+  <text x="56" y="70" fill="#7a7365" font-family="Menlo, monospace" font-size="12" font-weight="700" letter-spacing="3">RAG &#183; REVISITED</text>
   <text x="56" y="108" fill="#211f1b" font-size="30" font-weight="700">Follow a document through the pipeline &#8212;</text>
   <text x="56" y="146" fill="#211f1b" font-size="30" font-weight="700">each part breaks in its own way.</text>
 
@@ -17,8 +17,8 @@
     <rect x="30" y="320" width="160" height="74" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="1.5"/>
     <text x="110" y="364" text-anchor="middle" fill="#5f594e" font-size="19" font-weight="600">Raw text</text>
 
-    <rect x="980" y="320" width="160" height="74" rx="0" fill="#faf8f3" stroke="#3d6b4f" stroke-width="1.5"/>
-    <text x="1060" y="364" text-anchor="middle" fill="#3d6b4f" font-size="19" font-weight="700">Answer</text>
+    <rect x="980" y="320" width="160" height="74" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="1.5"/>
+    <text x="1060" y="364" text-anchor="middle" fill="#211f1b" font-size="19" font-weight="700">Answer</text>
 
     <!-- four breaking stages -->
     <rect x="220" y="320" width="160" height="74" rx="0" fill="#faf8f3" stroke="#211f1b" stroke-width="2"/>

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" font-family="Georgia, serif">
   <rect x="1" y="1" width="1198" height="673" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="2"/>
 
-  <text x="56" y="66" fill="#7a7365" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="3">EMBEDDERS &#183; CONTRAST COLLAPSE</text>
+  <text x="56" y="66" fill="#7a7365" font-family="Menlo, monospace" font-size="12" font-weight="700" letter-spacing="3">EMBEDDERS &#183; CONTRAST COLLAPSE</text>
   <text x="56" y="108" fill="#211f1b" font-size="32" font-weight="700">The five-minute histogram.</text>
   <text x="56" y="138" fill="#5f594e" font-size="17">Don't read any single score &#8212; read the <tspan font-style="italic">shape</tspan> of the distribution.</text>
 

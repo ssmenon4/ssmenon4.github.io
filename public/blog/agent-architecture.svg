@@ -6,7 +6,7 @@
   <rect x="1" y="1" width="1158" height="688" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="2"/>
 
   <text x="40" y="50" fill="#211f1b" font-size="23" font-weight="700">The engine: a 4-stroke loop, gated by typed tool calls.</text>
-  <text x="40" y="76" fill="#5f594e" font-family="Menlo, monospace" font-size="13" letter-spacing="0.5">Three role contracts, no bleed — and every state change is a logged, replayable call.</text>
+  <text x="40" y="76" fill="#5f594e" font-family="Menlo, monospace" font-size="12" letter-spacing="0.5">Three role contracts, no bleed — and every state change is a logged, replayable call.</text>
 
   <!-- return arc: the loop -->
   <path d="M974 150 L974 132 Q974 124 964 124 L180 124 Q170 124 170 132 L170 150" fill="none" stroke="#7a7365" stroke-width="2" marker-end="url(#ag)"/>
