@@ -3,11 +3,10 @@
  * Series navigation for posts that belong to a `series`.
  * Derives everything from frontmatter: the hub is the member at `order: 0`,
  * its title is the series title, and the remaining members are the ordered
- * parts. Renders a "back to overview" line plus prev/next cards. Renders
- * nothing on the hub post itself or on posts with no series.
+ * parts. Renders a "back to overview" line plus prev/next hairline rows.
+ * Renders nothing on the hub post itself or on posts with no series.
  */
 import { getCollection, type CollectionEntry } from "astro:content";
-import Icon from "./Icon.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -19,7 +18,6 @@ let ctx:
   | {
       seriesTitle: string;
       hubSlug: string;
-      label: string;
       prev: Entry | null;
       next: Entry | null;
     }
@@ -38,68 +36,41 @@ if (seriesId) {
   const isHub = post.slug === hub.slug;
 
   if (!isHub && idx !== -1) {
-    const partPos = parts.findIndex((m) => m.slug === post.slug); // 0-based
-    const isConclusion = partPos === parts.length - 1;
     ctx = {
       seriesTitle: hub.data.title,
       hubSlug: hub.slug,
-      label: isConclusion ? "The conclusion of" : `Part ${partPos + 1} of ${parts.length} ·`,
       prev: idx > 0 ? chain[idx - 1] : null,
       next: idx < chain.length - 1 ? chain[idx + 1] : null,
     };
   }
 }
+
+const numLabel = (p: Entry) => `№ ${String(p.data.order ?? 0).padStart(2, "0")}`;
+const wordLabel = (p: Entry) => p.data.title.toUpperCase().replace(/\s+/g, "-");
 ---
 
 {
   ctx && (
-    <nav aria-label="Series navigation" class="mt-xl pt-lg border-t border-outline-variant">
-      <a
-        href={`/blog/${ctx.hubSlug}`}
-        class="group inline-flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors mb-lg"
-      >
-        <Icon name="collections_bookmark" size={16} />
-        <span>
-          {ctx.label}{" "}
-          <span class="text-primary font-medium">{ctx.seriesTitle}</span>
-        </span>
+    <nav aria-label="Series navigation" class="series-nav mono">
+      {ctx.prev ? (
+        <a href={`/blog/${ctx.prev.slug}`} class="snrow">
+          &larr; {numLabel(ctx.prev)} &middot; {wordLabel(ctx.prev)}
+        </a>
+      ) : (
+        <div class="snrow" />
+      )}
+
+      <a href={`/blog/${ctx.hubSlug}`} class="snrow hub">
+        SERIES HUB
       </a>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter">
-        {ctx.prev ? (
-          <a
-            href={`/blog/${ctx.prev.slug}`}
-            class="group flex flex-col gap-xs p-lg rounded-xl border border-outline-variant hover:border-primary transition-colors"
-          >
-            <span class="inline-flex items-center gap-xs font-label-sm text-label-sm text-outline">
-              <Icon name="arrow_back" size={16} />
-              {ctx.prev.slug === ctx.hubSlug ? "Overview" : "Previous"}
-            </span>
-            <span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">
-              {ctx.prev.data.title}
-            </span>
-          </a>
-        ) : (
-          <div class="hidden sm:block" />
-        )}
-
-        {ctx.next ? (
-          <a
-            href={`/blog/${ctx.next.slug}`}
-            class="group flex flex-col gap-xs p-lg rounded-xl border border-outline-variant hover:border-primary transition-colors sm:text-right sm:items-end"
-          >
-            <span class="inline-flex items-center gap-xs font-label-sm text-label-sm text-outline">
-              Next
-              <Icon name="arrow_forward" size={16} />
-            </span>
-            <span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">
-              {ctx.next.data.title}
-            </span>
-          </a>
-        ) : (
-          <div class="hidden sm:block" />
-        )}
-      </div>
+      {ctx.next ? (
+        <a href={`/blog/${ctx.next.slug}`} class="snrow next">
+          {numLabel(ctx.next)} &middot; {wordLabel(ctx.next)} &rarr;
+        </a>
+      ) : (
+        <div class="snrow" />
+      )}
     </nav>
   )
 }

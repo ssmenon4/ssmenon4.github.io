@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Icon from "../../components/Icon.astro";
+import Plate from "../../components/Plate.astro";
 import SeriesNav from "../../components/SeriesNav.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
+import { readingTime } from "../../lib/reading-time";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -14,160 +15,40 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+
+const { heroKicker, heroPhrase, heroTagline, heroCredit, hideHero, image, category, date, title } =
+  post.data;
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} image={post.data.image} noiseBg>
-  <article class="max-w-3xl mx-auto px-gutter py-xl">
-    <a href="/blog" class="inline-flex items-center gap-xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors mb-lg">
-      <Icon name="arrow_back" size={18} /> All entries
-    </a>
+<BaseLayout title={title} description={post.data.description} image={image}>
+  <div class="page article-page">
+    <a href="/blog" class="back mono">&larr; WRITING</a>
 
-    <header class="mb-lg">
-      <div class="flex items-center gap-sm mb-md">
-        <span class="bg-surface-container py-xs px-sm rounded-full font-label-sm text-label-sm text-on-surface-variant">{post.data.category}</span>
-        <span class="font-label-sm text-label-sm text-outline">{fmt(post.data.date)}</span>
+    <header class="article-head">
+      {heroKicker && <div class="kicker mono">{heroKicker}</div>}
+      <h1>{heroPhrase || title}</h1>
+      {heroTagline && <p class="tagline">{heroTagline}</p>}
+      {
+        image && !hideHero && (
+          <Plate caption={heroCredit ? `photo: ${heroCredit}` : `fig. — ${title}`}>
+            <img
+              src={image}
+              alt={title}
+              style="display:block; width:100%; height:auto; object-fit:cover;"
+            />
+          </Plate>
+        )
+      }
+      <div class="byline mono">
+        {fmt(date)} &middot; {readingTime(post.body)} MIN &middot; {category.toUpperCase()}
       </div>
-      <h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-sm">{post.data.title}</h1>
-      <p class="font-body-lg text-body-lg text-on-surface-variant">{post.data.description}</p>
     </header>
 
-    {
-      post.data.image && !post.data.hideHero && (
-        post.data.heroPhrase || post.data.heroCredit ? (
-          <figure class="mb-xl">
-            <div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-surface-container">
-              <img alt={post.data.title} class="absolute inset-0 w-full h-full object-cover" src={post.data.image} />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5"></div>
-              <div class="absolute inset-x-0 bottom-0 p-md md:p-lg">
-                {post.data.heroKicker && (
-                  <p class="font-label-md text-label-md uppercase tracking-[0.22em] text-white/75 mb-xs drop-shadow">{post.data.heroKicker}</p>
-                )}
-                {post.data.heroPhrase && (
-                  <h2 class="font-headline-md text-headline-md md:font-display-lg md:text-display-lg text-white drop-shadow-lg">{post.data.heroPhrase}</h2>
-                )}
-                {post.data.heroTagline && (
-                  <p class="font-body-lg text-body-lg italic text-white/85 mt-xs drop-shadow">{post.data.heroTagline}</p>
-                )}
-              </div>
-            </div>
-            {post.data.heroCredit && (
-              <figcaption class="hero-credit mt-sm font-label-sm text-label-sm text-outline" set:html={post.data.heroCredit} />
-            )}
-          </figure>
-        ) : (
-          <div class="w-full aspect-[16/9] rounded-xl overflow-hidden mb-xl bg-surface-container">
-            <img alt={post.data.title} class="w-full h-full object-cover pebble-shape" src={post.data.image} />
-          </div>
-        )
-      )
-    }
-
-    <div class="prose-portfolio font-body-lg text-body-lg text-on-surface-variant">
+    <article class="prose-journal">
+      {heroPhrase && <p class="real-title">{title}</p>}
       <Content />
-    </div>
+    </article>
 
     <SeriesNav post={post} />
-  </article>
+  </div>
 </BaseLayout>
-
-<style is:global>
-  /* Hero photo-credit caption: underline the attribution links */
-  .hero-credit a {
-    color: rgb(var(--color-primary));
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  /* Lightweight typographic styling for rendered Markdown */
-  .prose-portfolio :is(h1, h2, h3, h4) {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    color: var(--color-on-surface);
-    font-weight: 600;
-    line-height: 1.25;
-    margin: 2rem 0 0.75rem;
-  }
-  .prose-portfolio h2 {
-    font-size: 28px;
-  }
-  .prose-portfolio h3 {
-    font-size: 22px;
-  }
-  .prose-portfolio p {
-    margin: 0 0 1.25rem;
-  }
-  .prose-portfolio a {
-    color: rgb(var(--color-primary));
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .prose-portfolio a.link-highlight {
-    color: rgb(var(--color-primary));
-    font-weight: 600;
-  }
-  .prose-portfolio a.link-highlight:hover {
-    color: rgb(var(--color-primary-container));
-  }
-  .prose-portfolio ul,
-  .prose-portfolio ol {
-    margin: 0 0 1.25rem 1.25rem;
-    list-style: revert;
-  }
-  .prose-portfolio li {
-    margin-bottom: 0.4rem;
-  }
-  .prose-portfolio blockquote {
-    border-left: 3px solid var(--color-primary);
-    padding-left: 1.25rem;
-    margin: 1.5rem 0;
-    color: var(--color-on-surface);
-    font-style: italic;
-  }
-  .prose-portfolio img {
-    border-radius: 0.75rem;
-    margin: 1.5rem 0;
-  }
-  .prose-portfolio :is(code, pre) {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.9em;
-  }
-  .prose-portfolio pre {
-    background: var(--color-surface-container-high);
-    padding: 1rem 1.25rem;
-    border-radius: 0.75rem;
-    overflow-x: auto;
-    margin: 1.5rem 0;
-  }
-  .prose-portfolio :not(pre) > code {
-    background: var(--color-surface-container-high);
-    padding: 0.15em 0.4em;
-    border-radius: 0.25rem;
-  }
-  /* Tables: markdown pipe-tables render here (used by the RAG series).
-     display:block + overflow-x keeps wide tables scrollable without the
-     page body scrolling sideways on narrow viewports. */
-  .prose-portfolio table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    border-collapse: collapse;
-    margin: 1.75rem 0;
-    font-size: 0.92em;
-    font-variant-numeric: tabular-nums;
-  }
-  .prose-portfolio thead th {
-    text-align: left;
-    font-family: "Plus Jakarta Sans", sans-serif;
-    font-weight: 600;
-    color: rgb(var(--color-on-surface));
-    border-bottom: 2px solid rgb(var(--color-outline-variant));
-    padding: 0.55rem 0.9rem;
-  }
-  .prose-portfolio tbody td {
-    border-bottom: 1px solid rgb(var(--color-outline-variant) / 0.5);
-    padding: 0.55rem 0.9rem;
-    vertical-align: top;
-  }
-  .prose-portfolio tbody tr:last-child td {
-    border-bottom: 0;
-  }
-</style>
