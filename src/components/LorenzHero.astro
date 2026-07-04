@@ -221,7 +221,10 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
-    const ro = new ResizeObserver(resize);
+    const ro = new ResizeObserver(() => {
+      resize();
+      startLoop(); // redraw (and re-park) the reduced-motion loop
+    });
     ro.observe(host);
 
     // ---- Interaction -----------------------------------------------------
@@ -231,6 +234,7 @@
       lastPointerY = e.clientY;
       lastInteraction = performance.now();
       canvas.setPointerCapture(e.pointerId);
+      startLoop(); // wake the parked reduced-motion loop for the drag
     };
     const onMove = (e: PointerEvent) => {
       if (!dragging) return;
@@ -257,7 +261,10 @@
     canvas.addEventListener("pointercancel", onUp);
 
     // React to theme toggle.
-    const themeObserver = new MutationObserver(buildColors);
+    const themeObserver = new MutationObserver(() => {
+      buildColors();
+      startLoop(); // redraw (and re-park) the reduced-motion loop
+    });
     themeObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["data-theme"],
@@ -266,7 +273,10 @@
     // react to the media query flipping (e.g. system dark mode toggled).
     const darkMedia = window.matchMedia("(prefers-color-scheme: dark)");
     const onMediaChange = () => {
-      if (!document.documentElement.getAttribute("data-theme")) buildColors();
+      if (!document.documentElement.getAttribute("data-theme")) {
+        buildColors();
+        startLoop(); // redraw (and re-park) the reduced-motion loop
+      }
     };
     darkMedia.addEventListener("change", onMediaChange);
 
@@ -303,10 +313,11 @@
         }
       }
 
-      // "Breathing": a slow opacity pulse on the rail (no geometry scaling).
-      // Under reduced motion it's the only life, so it breathes; in animated
-      // mode it's pinned at minimum and the comets carry the motion instead.
-      const pulse = reduceMotion ? 0.5 + 0.5 * Math.sin(now * 0.001) : 0;
+      // Rail opacity driver. Under reduced motion the rail is pinned at full,
+      // steady opacity (no breathing — the attractor renders complete and
+      // static); in animated mode it's pinned at minimum and the comets carry
+      // the motion instead.
+      const pulse = reduceMotion ? 1 : 0;
       const scale = (Math.min(cssW, cssH) * 0.5 * 0.85) / R;
       const ox = cssW / 2;
       const oy = cssH / 2;
@@ -370,6 +381,20 @@
       drawDots(true);
 
       ctx.globalAlpha = 1;
+
+      // Under reduced motion nothing animates on its own, so once any
+      // drag-driven tilt has settled back, park the loop entirely (no rAF
+      // keeps running). Interaction / resize / theme changes call startLoop()
+      // to redraw, and the loop parks itself again after settling.
+      if (
+        reduceMotion &&
+        !dragging &&
+        now - lastInteraction > RETURN_DELAY &&
+        Math.abs(pitch - DEFAULT_PITCH) < 0.001
+      ) {
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
     };
 
     function drawDots(near: boolean) {
