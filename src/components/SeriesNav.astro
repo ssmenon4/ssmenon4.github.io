@@ -46,7 +46,7 @@ if (seriesId) {
 }
 
 const numLabel = (p: Entry) => `№ ${String(p.data.order ?? 0).padStart(2, "0")}`;
-const wordLabel = (p: Entry) => p.data.title.toUpperCase().replace(/\s+/g, "-");
+const wordLabel = (p: Entry) => p.slug.toUpperCase();
 ---
 
 {
