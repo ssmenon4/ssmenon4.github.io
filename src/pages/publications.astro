@@ -89,6 +89,9 @@ const yearRange = Math.min(...years) === Math.max(...years)
 </style>
 
 <script>
+  const COPY_LABEL = "click to copy";
+  const resetTimers = new Map<HTMLElement, number>();
+
   document.addEventListener("click", async (e) => {
     const target = e.target as HTMLElement;
 
@@ -108,11 +111,16 @@ const yearRange = Math.min(...years) === Math.max(...years)
       if (pre && note) {
         try {
           await navigator.clipboard.writeText(pre.textContent ?? "");
-          const original = note.textContent;
           note.textContent = "copied ✓";
-          setTimeout(() => {
-            note.textContent = original;
-          }, 1500);
+          const pending = resetTimers.get(note);
+          if (pending !== undefined) clearTimeout(pending);
+          resetTimers.set(
+            note,
+            window.setTimeout(() => {
+              note.textContent = COPY_LABEL;
+              resetTimers.delete(note);
+            }, 1500),
+          );
         } catch {
           /* clipboard unavailable — no-op */
         }
