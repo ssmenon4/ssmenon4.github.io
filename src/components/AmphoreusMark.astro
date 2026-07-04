@@ -119,6 +119,9 @@ const { height = 120 } = Astro.props;
         attributes: true,
         attributeFilter: ["data-theme"],
       });
+      // Re-rasterize at the new size whenever layout changes the canvas box —
+      // without this the initial bitmap gets CSS-stretched (blurry on mobile).
+      new ResizeObserver(() => draw(cv)).observe(cv);
     });
   }
 

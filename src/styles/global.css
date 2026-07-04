@@ -188,6 +188,7 @@ section{ padding:56px 0 8px; }
 @media (max-width:720px){
   .top{ padding-top:18px; }
   .top nav{ gap:14px 18px; }
+  .plate-cap{ text-align:left; }
   .cv,.skillrow{ grid-template-columns:1fr; }
   .ledger .f{ display:none; }
   .wpost{ grid-template-columns:44px 1fr; }
