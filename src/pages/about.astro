@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageMast from "../components/PageMast.astro";
+import { site, socials } from "../config/site";
+import { nowStatus } from "../data/now";
+
+function github() {
+  return socials.find((s) => s.label === "GitHub")?.href;
+}
+function linkedin() {
+  return socials.find((s) => s.label === "LinkedIn")?.href;
+}
+---
+
+<BaseLayout title="About">
+  <div class="page">
+    <PageMast crumb="ABOUT" title="About" />
+
+    <div class="letter">
+      <p>I'm Shivashankar, an AI engineer. I've been drawn to the same question since I first saw a Lorenz attractor: how do simple rules produce behavior you couldn't have guessed? These days I ask it of LLM agents instead of differential equations — most recently in Amphoreus, a D&amp;D campaign where every seat at the table is an LLM, built to study how long-horizon plans survive contact with a changing world.</p>
+      <p>Before agents I worked on other kinds of difficult data — vibration from wheelchairs, ultraviolet foregrounds from a space telescope, retrieval over dense financial text. More recently, I spent a focused two years preparing for India's Civil Services examination: building a holistic understanding of the country's socio-economic issues, public policy, and governance. That research sharpened how I analyse complex, real-world problems — a lens I still reach for as an engineer.</p>
+      <p>Off the clock I gravitate to media that asks something of you — <em>The Talos Principle</em> is a puzzle game that quietly asks what it means to be human, and that's the kind of thing that stays with me.</p>
+      <p>I can't tell you where this is all going. But <a href="/">the mark at the top of this page</a> never repeats itself and never leaves its shape, and that seems like a reasonable thing to aim for.</p>
+    </div>
+
+    <div class="now letter-width">
+      <div class="lbl">NOW</div>
+      <ul>
+        <li><b>Building</b> — {nowStatus.building.charAt(0)}{nowStatus.building.slice(1).toLowerCase()}: long-horizon planning &amp; coordination in agents <span class="mono led">●</span></li>
+        <li><b>Writing</b> — what comes after the <em>RAG, Revisited</em> series</li>
+        <li><b>Open to</b> — {nowStatus.openTo.charAt(0)}{nowStatus.openTo.slice(1).toLowerCase()}</li>
+        <li><b>Reach me</b> — <a href={`mailto:${site.email}`}>{site.email}</a> · <a href={github()}>GitHub</a> · <a href={linkedin()}>LinkedIn</a></li>
+      </ul>
+    </div>
+
+    <div class="colophon letter-width">
+      <div class="lbl mono">COLOPHON</div>
+      <p>Set in Newsreader and JetBrains Mono; rendered by Astro; no trackers. fig. 1 is a live Lorenz attractor — σ=10, ρ=28, β=8/3 — integrated fresh on every visit. Drag it.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .letter, .letter-width { max-width: 56ch; }
+  .letter { margin-top: 18px; }
+  .letter p {
+    font-family: var(--font-serif);
+    font-size: 16.5px;
+    line-height: 1.8;
+    margin: 0 0 16px;
+  }
+  .letter p:last-child { margin-bottom: 0; }
+  .letter a { color: var(--signal); }
+
+  .now { margin-top: 26px; }
+  .now .led { color: var(--signal); }
+
+  .colophon {
+    margin-top: 30px;
+    border: 1px solid var(--line-strong);
+    padding: 16px 18px;
+  }
+  .colophon .lbl {
+    font-size: 10.5px;
+    color: var(--meta);
+    letter-spacing: .12em;
+    margin-bottom: 8px;
+  }
+  .colophon p {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    color: var(--sub);
+    line-height: 1.7;
+    margin: 0;
+  }
+</style>
