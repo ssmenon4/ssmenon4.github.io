@@ -2,10 +2,13 @@
 import { site, nav } from "../config/site";
 import ThemeToggle from "./ThemeToggle.astro";
 ---
-<header class="page">
-  <div class="top">
-    <a class="name" href="/">{site.brand}</a>
-    <nav>
+<header class="page flex justify-center py-4">
+  <div class="top flex items-center gap-12">
+    <!-- Brand Name -->
+    <a class="name whitespace-nowrap" href="/">{site.brand}</a>
+    
+    <!-- Navigation Links -->
+    <nav class="flex items-center gap-6">
       {nav.map((n) => <a href={n.href}>{n.label}</a>)}
       <ThemeToggle />
     </nav>
