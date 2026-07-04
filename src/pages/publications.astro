@@ -1,48 +1,122 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Icon from "../components/Icon.astro";
+import PageMast from "../components/PageMast.astro";
 import { publications } from "../data/publications";
+
+const years = publications.map((p) => Number(p.year));
+const yearRange = Math.min(...years) === Math.max(...years)
+  ? `${Math.min(...years)}`
+  : `${Math.min(...years)} – ${Math.max(...years)}`;
 ---
 
-<BaseLayout title="Publications" noiseBg>
-  <div class="max-w-container-max mx-auto px-gutter py-xl">
-    <header class="mb-xl max-w-3xl">
-      <h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg mb-sm text-primary">
-        Selected Writing &amp; Research
-      </h1>
-      <p class="font-body-lg text-body-lg text-on-surface-variant">
-        Peer-reviewed publications in astronomy and machine learning.
-      </p>
-    </header>
+<BaseLayout title="Publications">
+  <div class="page">
+    <PageMast
+      crumb="PAPERS"
+      title="Papers"
+      sub="Peer-reviewed work in accessible robotics and ultraviolet astronomy."
+      kv={`${publications.length} PUBLICATIONS · ${yearRange} · GOOGLE SCHOLAR ↗`}
+    />
 
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-lg relative">
-      <div class="hidden md:block absolute left-[16.666%] top-0 bottom-0 w-px bg-outline-variant opacity-50 ml-[-0.5px]"></div>
-      {
-        publications.map((pub, i) => (
-          <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-12 gap-gutter relative group">
-            <div class="md:col-span-2 pt-xs relative z-10">
-              <div
-                class:list={[
-                  "hidden md:block absolute right-[-24px] top-[10px] w-[8px] h-[8px] rounded-full group-hover:scale-150 transition-all duration-300",
-                  i === 0 ? "bg-primary" : "bg-surface-variant group-hover:bg-primary",
-                ]}
-              />
-              <time class="font-label-sm text-label-sm text-secondary block mb-1">{pub.date}</time>
-              <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">{pub.venue}</span>
-            </div>
-            <article class="md:col-start-4 md:col-span-8 bg-surface-container-lowest border border-outline-variant p-lg rounded-xl transition-all duration-300 hover:border-outline group-hover:-translate-y-1">
-              <h2 class="font-headline-md text-headline-md mb-sm text-on-surface">{pub.title}</h2>
-              <p class="font-body-md text-body-md text-on-surface-variant mb-md">{pub.description}</p>
-              {pub.href && (
-                <a class="inline-flex items-center gap-xs font-label-md text-label-md text-primary hover:text-tertiary transition-colors group/link" href={pub.href}>
-                  {pub.cta ?? "Read more"}
-                  <Icon name="arrow_forward" class="text-sm transition-transform group-hover/link:translate-x-1" />
-                </a>
-              )}
-            </article>
+    {
+      publications.map((p, i) => (
+        <div class="paper">
+          <div class="mono kicker">
+            {p.year} · {p.kind.toUpperCase()}
           </div>
-        ))
-      }
+          <div class="t">{p.title}</div>
+          <div class="v" set:html={p.description.replace(
+            "S.S. Menon",
+            "<b>Shivashankar S Menon</b>"
+          )} />
+          <div style="margin-top:6px;">
+            <a class="doi" href={p.href} target="_blank" rel="noopener">
+              doi:{p.href?.split("doi.org/")[1]}
+            </a>
+            &nbsp;&nbsp;
+            <button type="button" class="doi cite-toggle" data-idx={i}>
+              [ CITE ]
+            </button>
+          </div>
+          <div class="plate cite-plate" data-idx={i} hidden>
+            <pre class="mono cite-pre" data-idx={i}>{p.bibtex}</pre>
+            <div class="plate-cap copy-note" data-idx={i}>click to copy</div>
+          </div>
+        </div>
+      ))
+    }
+    <div class="plate-cap" style="text-align:left; margin-top:14px;">
+      [ CITE ] flips the entry open to a BibTeX block — copy-ready, mono, one click.
     </div>
   </div>
 </BaseLayout>
+
+<style>
+  .kicker {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--meta);
+    margin-bottom: 5px;
+  }
+  .cite-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    color: var(--meta);
+  }
+  .cite-toggle:hover {
+    color: var(--signal);
+  }
+  .cite-plate {
+    margin-top: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+  }
+  .cite-pre {
+    margin: 0;
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--sub);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .copy-note {
+    margin-top: 8px;
+    text-align: right;
+  }
+</style>
+
+<script>
+  document.addEventListener("click", async (e) => {
+    const target = e.target as HTMLElement;
+
+    const toggle = target.closest<HTMLElement>(".cite-toggle");
+    if (toggle) {
+      const idx = toggle.dataset.idx;
+      const plate = document.querySelector<HTMLElement>(`.cite-plate[data-idx="${idx}"]`);
+      if (plate) plate.hidden = !plate.hidden;
+      return;
+    }
+
+    const plate = target.closest<HTMLElement>(".cite-plate");
+    if (plate) {
+      const idx = plate.dataset.idx;
+      const pre = plate.querySelector<HTMLElement>(`.cite-pre[data-idx="${idx}"]`);
+      const note = plate.querySelector<HTMLElement>(`.copy-note[data-idx="${idx}"]`);
+      if (pre && note) {
+        try {
+          await navigator.clipboard.writeText(pre.textContent ?? "");
+          const original = note.textContent;
+          note.textContent = "copied ✓";
+          setTimeout(() => {
+            note.textContent = original;
+          }, 1500);
+        } catch {
+          /* clipboard unavailable — no-op */
+        }
+      }
+    }
+  });
+</script>
