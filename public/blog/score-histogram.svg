@@ -1,74 +1,72 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" font-family="Helvetica, Arial, sans-serif">
-  <rect x="1" y="1" width="1198" height="673" rx="24" fill="#FFFFFF" stroke="#E6E4DE" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" font-family="Georgia, serif">
+  <rect x="1" y="1" width="1198" height="673" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="2"/>
 
-  <text x="56" y="66" fill="#9A6A4E" font-size="15" font-weight="700" letter-spacing="3">EMBEDDERS · CONTRAST COLLAPSE</text>
-  <text x="56" y="108" fill="#1A1A1A" font-size="32" font-weight="700">The five-minute histogram.</text>
-  <text x="56" y="138" fill="#6B7280" font-size="17">Don't read any single score — read the <tspan font-style="italic">shape</tspan> of the distribution.</text>
+  <text x="56" y="66" fill="#7a7365" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="3">EMBEDDERS &#183; CONTRAST COLLAPSE</text>
+  <text x="56" y="108" fill="#211f1b" font-size="32" font-weight="700">The five-minute histogram.</text>
+  <text x="56" y="138" fill="#5f594e" font-size="17">Don't read any single score &#8212; read the <tspan font-style="italic">shape</tspan> of the distribution.</text>
 
   <!-- ================= LEFT: healthy ================= -->
   <g>
-    <rect x="56" y="188" width="520" height="392" rx="16" fill="#F1FAF5" stroke="#B8E3CC" stroke-width="1.5"/>
-    <text x="82" y="224" fill="#059669" font-size="19" font-weight="700">Healthy</text>
-    <text x="82" y="246" fill="#5E8C77" font-size="14">the good match sits well above the noise</text>
+    <rect x="56" y="188" width="520" height="392" rx="0" fill="#faf8f3" stroke="#3d6b4f" stroke-width="1.5"/>
+    <text x="82" y="224" fill="#3d6b4f" font-size="19" font-weight="700">Healthy</text>
+    <text x="82" y="246" fill="#5f594e" font-family="Menlo, monospace" font-size="12" letter-spacing="0.3">the good match sits well above the noise</text>
 
     <!-- axis -->
-    <line x1="96" y1="520" x2="548" y2="520" stroke="#9CA3AF" stroke-width="1.5"/>
-    <!-- bars: grey noise + isolated blue target -->
-    <g fill="#CBD5E1">
-      <rect x="100" y="506" width="26" height="14" rx="2"/>
-      <rect x="134" y="490" width="26" height="30" rx="2"/>
-      <rect x="168" y="468" width="26" height="52" rx="2"/>
-      <rect x="202" y="440" width="26" height="80" rx="2"/>
-      <rect x="236" y="416" width="26" height="104" rx="2"/>
-      <rect x="270" y="400" width="26" height="120" rx="2"/>
-      <rect x="304" y="420" width="26" height="100" rx="2"/>
-      <rect x="338" y="448" width="26" height="72" rx="2"/>
-      <rect x="372" y="474" width="26" height="46" rx="2"/>
-      <rect x="406" y="494" width="26" height="26" rx="2"/>
-      <rect x="440" y="508" width="26" height="12" rx="2"/>
+    <line x1="96" y1="520" x2="548" y2="520" stroke="#c9c2b2" stroke-width="1.5"/>
+    <!-- bars: neutral noise + isolated highlighted target -->
+    <g fill="#c9c2b2">
+      <rect x="100" y="506" width="26" height="14" rx="0"/>
+      <rect x="134" y="490" width="26" height="30" rx="0"/>
+      <rect x="168" y="468" width="26" height="52" rx="0"/>
+      <rect x="202" y="440" width="26" height="80" rx="0"/>
+      <rect x="236" y="416" width="26" height="104" rx="0"/>
+      <rect x="270" y="400" width="26" height="120" rx="0"/>
+      <rect x="304" y="420" width="26" height="100" rx="0"/>
+      <rect x="338" y="448" width="26" height="72" rx="0"/>
+      <rect x="372" y="474" width="26" height="46" rx="0"/>
+      <rect x="406" y="494" width="26" height="26" rx="0"/>
+      <rect x="440" y="508" width="26" height="12" rx="0"/>
     </g>
-    <rect x="508" y="388" width="26" height="132" rx="2" fill="#2563EB"/>
+    <rect x="508" y="388" width="26" height="132" rx="0" fill="#3d6b4f"/>
     <!-- target callout -->
-    <path d="M521 360 v20" stroke="#2563EB" stroke-width="2"/>
-    <text x="521" y="350" text-anchor="middle" fill="#2563EB" font-size="13" font-weight="700">relevant chunk</text>
+    <path d="M521 360 v20" stroke="#3d6b4f" stroke-width="2"/>
+    <text x="521" y="350" text-anchor="middle" fill="#3d6b4f" font-size="13" font-weight="700">relevant chunk</text>
     <!-- x labels -->
-    <g fill="#9CA3AF" font-size="12" text-anchor="middle">
+    <g fill="#7a7365" font-family="Menlo, monospace" font-size="11.5" text-anchor="middle">
       <text x="100" y="540">0.0</text><text x="322" y="540">0.5</text><text x="534" y="540">1.0</text>
     </g>
-    <text x="322" y="566" text-anchor="middle" fill="#6B7280" font-size="13">cosine similarity  →  count</text>
+    <text x="322" y="566" text-anchor="middle" fill="#5f594e" font-family="Menlo, monospace" font-size="12" letter-spacing="0.3">cosine similarity &#160;&#8594;&#160; count</text>
   </g>
 
   <!-- ================= RIGHT: collapsed ================= -->
   <g>
-    <rect x="624" y="188" width="520" height="392" rx="16" fill="#FDF6F5" stroke="#F0C9C4" stroke-width="1.5"/>
-    <text x="650" y="224" fill="#DC2626" font-size="19" font-weight="700">Collapsed</text>
-    <text x="650" y="246" fill="#9B6D6D" font-size="14">everything bunches at ~0.8 — top-k draws lots</text>
+    <rect x="624" y="188" width="520" height="392" rx="0" fill="#faf8f3" stroke="#8a3b2e" stroke-width="1.5"/>
+    <text x="650" y="224" fill="#8a3b2e" font-size="19" font-weight="700">Collapsed</text>
+    <text x="650" y="246" fill="#5f594e" font-family="Menlo, monospace" font-size="12" letter-spacing="0.3">everything bunches at ~0.8 &#8212; top-k draws lots</text>
 
-    <line x1="664" y1="520" x2="1116" y2="520" stroke="#9CA3AF" stroke-width="1.5"/>
-    <g fill="#CBD5E1">
-      <rect x="668" y="514" width="26" height="6" rx="2"/>
-      <rect x="702" y="514" width="26" height="6" rx="2"/>
-      <rect x="736" y="512" width="26" height="8" rx="2"/>
-      <rect x="770" y="510" width="26" height="10" rx="2"/>
-      <rect x="804" y="504" width="26" height="16" rx="2"/>
-      <rect x="838" y="480" width="26" height="40" rx="2"/>
-      <rect x="872" y="392" width="26" height="128" rx="2"/>
-      <rect x="906" y="368" width="26" height="152" rx="2"/>
-      <rect x="974" y="380" width="26" height="140" rx="2"/>
-      <rect x="1008" y="472" width="26" height="48" rx="2"/>
-      <rect x="1042" y="510" width="26" height="10" rx="2"/>
-      <rect x="1076" y="514" width="26" height="6" rx="2"/>
+    <line x1="664" y1="520" x2="1116" y2="520" stroke="#c9c2b2" stroke-width="1.5"/>
+    <g fill="#c9c2b2">
+      <rect x="668" y="514" width="26" height="6" rx="0"/>
+      <rect x="702" y="514" width="26" height="6" rx="0"/>
+      <rect x="736" y="512" width="26" height="8" rx="0"/>
+      <rect x="770" y="510" width="26" height="10" rx="0"/>
+      <rect x="804" y="504" width="26" height="16" rx="0"/>
+      <rect x="838" y="480" width="26" height="40" rx="0"/>
+      <rect x="872" y="392" width="26" height="128" rx="0"/>
+      <rect x="906" y="368" width="26" height="152" rx="0"/>
+      <rect x="974" y="380" width="26" height="140" rx="0"/>
+      <rect x="1008" y="472" width="26" height="48" rx="0"/>
+      <rect x="1042" y="510" width="26" height="10" rx="0"/>
+      <rect x="1076" y="514" width="26" height="6" rx="0"/>
     </g>
     <!-- target barely ahead, inside the spike -->
-    <rect x="940" y="360" width="26" height="160" rx="2" fill="#2563EB"/>
-    <path d="M953 332 v20" stroke="#2563EB" stroke-width="2"/>
-    <text x="953" y="322" text-anchor="middle" fill="#2563EB" font-size="13" font-weight="700">relevant chunk</text>
-    <text x="953" y="306" text-anchor="middle" fill="#B91C1C" font-size="12" font-weight="700">— barely ahead</text>
-    <g fill="#9CA3AF" font-size="12" text-anchor="middle">
+    <rect x="940" y="360" width="26" height="160" rx="0" fill="#8a3b2e"/>
+    <path d="M953 332 v20" stroke="#8a3b2e" stroke-width="2"/>
+    <text x="953" y="322" text-anchor="middle" fill="#8a3b2e" font-size="13" font-weight="700">relevant chunk</text>
+    <text x="953" y="306" text-anchor="middle" fill="#8a3b2e" font-size="12" font-weight="700">&#8212; barely ahead</text>
+    <g fill="#7a7365" font-family="Menlo, monospace" font-size="11.5" text-anchor="middle">
       <text x="668" y="540">0.0</text><text x="890" y="540">0.5</text><text x="1102" y="540">1.0</text>
     </g>
-    <text x="890" y="566" text-anchor="middle" fill="#6B7280" font-size="13">cosine similarity  →  count</text>
+    <text x="890" y="566" text-anchor="middle" fill="#5f594e" font-family="Menlo, monospace" font-size="12" letter-spacing="0.3">cosine similarity &#160;&#8594;&#160; count</text>
   </g>
-
-  <text x="600" y="622" text-anchor="middle" fill="#9CA3AF" font-size="14" font-style="italic">Same embedder, one domain. High mean + tiny variance = nothing is retrievable.</text>
 </svg>

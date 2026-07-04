@@ -1,81 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" font-family="Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" font-family="Georgia, serif">
   <defs>
     <marker id="br-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/>
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a7365"/>
     </marker>
   </defs>
-  <rect x="1" y="1" width="1198" height="673" rx="24" fill="#FFFFFF" stroke="#E6E4DE" stroke-width="2"/>
+  <rect x="1" y="1" width="1198" height="673" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="2"/>
 
-  <text x="56" y="60" fill="#9A6A4E" font-size="15" font-weight="700" letter-spacing="3">ROUTING · QUESTION COMPLEXITY</text>
-  <text x="56" y="100" fill="#1A1A1A" font-size="30" font-weight="700">Two strategies, opposite ends of Bloom's ladder.</text>
+  <text x="56" y="60" fill="#7a7365" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="3">ROUTING &#183; QUESTION COMPLEXITY</text>
+  <text x="56" y="100" fill="#211f1b" font-size="30" font-weight="700">Two strategies, opposite ends of Bloom's ladder.</text>
 
   <!-- router -->
-  <rect x="470" y="126" width="260" height="46" rx="12" fill="#EFF4FF" stroke="#2563EB" stroke-width="2"/>
-  <text x="600" y="155" text-anchor="middle" fill="#1D3F91" font-size="16" font-weight="700">Router — classify, then route</text>
+  <rect x="470" y="126" width="260" height="46" rx="0" fill="#faf8f3" stroke="#996b16" stroke-width="2"/>
+  <text x="600" y="155" text-anchor="middle" fill="#996b16" font-size="16" font-weight="700">Router &#8212; classify, then route</text>
 
   <!-- cognitive demand axis -->
-  <line x1="120" y1="560" x2="120" y2="212" stroke="#9CA3AF" stroke-width="2" marker-end="url(#br-arrow)"/>
-  <text x="106" y="386" fill="#6B7280" font-size="14" font-weight="700" transform="rotate(-90 106 386)" text-anchor="middle">cognitive demand</text>
+  <line x1="120" y1="560" x2="120" y2="212" stroke="#7a7365" stroke-width="2" marker-end="url(#br-arrow)"/>
+  <text x="106" y="386" fill="#5f594e" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="0.5" transform="rotate(-90 106 386)" text-anchor="middle">cognitive demand</text>
 
   <!-- column headers -->
-  <text x="470" y="200" text-anchor="middle" fill="#6B7280" font-size="14" font-weight="700">Single-shot</text>
-  <text x="730" y="200" text-anchor="middle" fill="#6B7280" font-size="14" font-weight="700">Decompose-first</text>
+  <text x="470" y="200" text-anchor="middle" fill="#5f594e" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="0.5">Single-shot</text>
+  <text x="730" y="200" text-anchor="middle" fill="#5f594e" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="0.5">Decompose-first</text>
 
   <!-- tiers: top = Create ... bottom = Remember -->
-  <!-- helper look: bar x 300..770? use 300 wide centered; badges at 470 & 730 -->
   <g>
     <!-- Create -->
-    <rect x="300" y="212" width="600" height="50" rx="10" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
-    <text x="600" y="243" text-anchor="middle" fill="#1A1A1A" font-size="18" font-weight="600">Create</text>
+    <rect x="300" y="212" width="600" height="50" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="1.5"/>
+    <text x="600" y="243" text-anchor="middle" fill="#211f1b" font-size="18" font-weight="600">Create</text>
     <!-- Evaluate -->
-    <rect x="300" y="270" width="600" height="50" rx="10" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
-    <text x="600" y="301" text-anchor="middle" fill="#1A1A1A" font-size="18" font-weight="600">Evaluate</text>
+    <rect x="300" y="270" width="600" height="50" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="1.5"/>
+    <text x="600" y="301" text-anchor="middle" fill="#211f1b" font-size="18" font-weight="600">Evaluate</text>
     <!-- Analyze -->
-    <rect x="300" y="328" width="600" height="50" rx="10" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
-    <text x="600" y="359" text-anchor="middle" fill="#1A1A1A" font-size="18" font-weight="600">Analyze</text>
+    <rect x="300" y="328" width="600" height="50" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="1.5"/>
+    <text x="600" y="359" text-anchor="middle" fill="#211f1b" font-size="18" font-weight="600">Analyze</text>
     <!-- Apply (contested) -->
-    <rect x="300" y="386" width="600" height="50" rx="10" fill="#FEF6E7" stroke="#EACB8B" stroke-width="1.5"/>
-    <text x="600" y="417" text-anchor="middle" fill="#1A1A1A" font-size="18" font-weight="600">Apply</text>
+    <rect x="300" y="386" width="600" height="50" rx="0" fill="#f2ead2" stroke="#996b16" stroke-width="1.5"/>
+    <text x="600" y="417" text-anchor="middle" fill="#211f1b" font-size="18" font-weight="600">Apply</text>
     <!-- Understand -->
-    <rect x="300" y="444" width="600" height="50" rx="10" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
-    <text x="600" y="475" text-anchor="middle" fill="#1A1A1A" font-size="18" font-weight="600">Understand</text>
+    <rect x="300" y="444" width="600" height="50" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="1.5"/>
+    <text x="600" y="475" text-anchor="middle" fill="#211f1b" font-size="18" font-weight="600">Understand</text>
     <!-- Remember -->
-    <rect x="300" y="502" width="600" height="50" rx="10" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
-    <text x="600" y="533" text-anchor="middle" fill="#1A1A1A" font-size="18" font-weight="600">Remember</text>
+    <rect x="300" y="502" width="600" height="50" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="1.5"/>
+    <text x="600" y="533" text-anchor="middle" fill="#211f1b" font-size="18" font-weight="600">Remember</text>
   </g>
 
-  <!-- badges: S at x=400, D at x=800; ✓ green, ✗ red, ~ amber -->
+  <!-- badges: S at x=400, D at x=800; check green, cross rust, tilde amber -->
   <g>
-    <!-- rows top->bottom y-centers: 237,295,353,411,469,527 -->
     <!-- Create -->
-    <g transform="translate(400,237)"><circle r="16" fill="#FEECEC"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/></g>
-    <g transform="translate(800,237)"><circle r="16" fill="#E6F6ED"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(400,237)"><circle r="16" fill="#f2ded9"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(800,237)"><circle r="16" fill="#dde9df"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
     <!-- Evaluate -->
-    <g transform="translate(400,295)"><circle r="16" fill="#FEECEC"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/></g>
-    <g transform="translate(800,295)"><circle r="16" fill="#E6F6ED"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(400,295)"><circle r="16" fill="#f2ded9"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(800,295)"><circle r="16" fill="#dde9df"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
     <!-- Analyze -->
-    <g transform="translate(400,353)"><circle r="16" fill="#FEECEC"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/></g>
-    <g transform="translate(800,353)"><circle r="16" fill="#E6F6ED"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(400,353)"><circle r="16" fill="#f2ded9"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(800,353)"><circle r="16" fill="#dde9df"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
     <!-- Apply (both ~) -->
-    <g transform="translate(400,411)"><circle r="16" fill="#FBEFD6"/><path d="M-7 0 L7 0" stroke="#D97706" stroke-width="3" stroke-linecap="round"/></g>
-    <g transform="translate(800,411)"><circle r="16" fill="#FBEFD6"/><path d="M-7 0 L7 0" stroke="#D97706" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(400,411)"><circle r="16" fill="#f2ead2"/><path d="M-7 0 L7 0" stroke="#996b16" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(800,411)"><circle r="16" fill="#f2ead2"/><path d="M-7 0 L7 0" stroke="#996b16" stroke-width="3" stroke-linecap="round"/></g>
     <!-- Understand -->
-    <g transform="translate(400,469)"><circle r="16" fill="#E6F6ED"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
-    <g transform="translate(800,469)"><circle r="16" fill="#FEECEC"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(400,469)"><circle r="16" fill="#dde9df"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(800,469)"><circle r="16" fill="#f2ded9"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
     <!-- Remember -->
-    <g transform="translate(400,527)"><circle r="16" fill="#E6F6ED"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
-    <g transform="translate(800,527)"><circle r="16" fill="#FEECEC"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/></g>
+    <g transform="translate(400,527)"><circle r="16" fill="#dde9df"/><path d="M-7 1 L-2 6 L8 -6" fill="none" stroke="#3d6b4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(800,527)"><circle r="16" fill="#f2ded9"/><path d="M-7 -7 L7 7 M7 -7 L-7 7" stroke="#8a3b2e" stroke-width="3" stroke-linecap="round"/></g>
   </g>
-
-  <text x="600" y="600" text-anchor="middle" fill="#9CA3AF" font-size="14" font-style="italic">Decomposition breaks lookups; single-shot misses synthesis. Route the question to the end that wins.</text>
 
   <!-- legend -->
-  <g font-size="13">
-    <g transform="translate(468,624)"><circle r="11" fill="#E6F6ED"/><path d="M-5 1 L-1 5 L6 -5" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
-    <text x="486" y="628" fill="#6B7280">wins</text>
-    <g transform="translate(560,624)"><circle r="11" fill="#FBEFD6"/><path d="M-5 0 L5 0" stroke="#D97706" stroke-width="2.5" stroke-linecap="round"/></g>
-    <text x="578" y="628" fill="#6B7280">either</text>
-    <g transform="translate(662,624)"><circle r="11" fill="#FEECEC"/><path d="M-5 -5 L5 5 M5 -5 L-5 5" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round"/></g>
-    <text x="680" y="628" fill="#6B7280">fails</text>
+  <g font-family="Menlo, monospace" font-size="12" letter-spacing="0.3">
+    <g transform="translate(468,624)"><circle r="11" fill="#dde9df"/><path d="M-5 1 L-1 5 L6 -5" fill="none" stroke="#3d6b4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <text x="486" y="628" fill="#5f594e">wins</text>
+    <g transform="translate(560,624)"><circle r="11" fill="#f2ead2"/><path d="M-5 0 L5 0" stroke="#996b16" stroke-width="2.5" stroke-linecap="round"/></g>
+    <text x="578" y="628" fill="#5f594e">either</text>
+    <g transform="translate(662,624)"><circle r="11" fill="#f2ded9"/><path d="M-5 -5 L5 5 M5 -5 L-5 5" stroke="#8a3b2e" stroke-width="2.5" stroke-linecap="round"/></g>
+    <text x="680" y="628" fill="#5f594e">fails</text>
   </g>
 </svg>

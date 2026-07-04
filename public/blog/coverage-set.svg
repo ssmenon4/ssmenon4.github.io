@@ -1,48 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" font-family="Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" font-family="Georgia, serif">
   <defs>
     <marker id="cs-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/>
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a3b2e"/>
     </marker>
   </defs>
-  <rect x="1" y="1" width="1198" height="673" rx="24" fill="#FFFFFF" stroke="#E6E4DE" stroke-width="2"/>
+  <rect x="1" y="1" width="1198" height="673" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="2"/>
 
-  <text x="56" y="66" fill="#9A6A4E" font-size="15" font-weight="700" letter-spacing="3">COVERAGE-BOUNDED RECALL</text>
-  <text x="56" y="108" fill="#1A1A1A" font-size="32" font-weight="700">You can't retrieve what you didn't index.</text>
+  <text x="56" y="66" fill="#7a7365" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="3">COVERAGE-BOUNDED RECALL</text>
+  <text x="56" y="108" fill="#211f1b" font-size="32" font-weight="700">You can't retrieve what you didn't index.</text>
 
   <!-- the chunk -->
-  <rect x="80" y="150" width="700" height="380" rx="22" fill="#FBFAF7" stroke="#D9D5CC" stroke-width="2"/>
-  <text x="104" y="184" fill="#6B7280" font-size="15" font-weight="700">ONE CHUNK — a set of answerable facts</text>
+  <rect x="80" y="150" width="700" height="380" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="2"/>
+  <text x="104" y="184" fill="#5f594e" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="0.5">ONE CHUNK &#8212; a set of answerable facts</text>
 
   <!-- covered region -->
   <path d="M150 250 C118 250 120 470 172 486 C360 520 520 480 540 388 C556 300 448 236 300 240 C236 240 196 244 150 250 Z"
-        fill="#E4ECFF" stroke="#2563EB" stroke-width="2" stroke-dasharray="8 6"/>
-  <text x="300" y="300" text-anchor="middle" fill="#2563EB" font-size="15" font-weight="700">indexed representation</text>
-  <text x="300" y="322" text-anchor="middle" fill="#5B77B8" font-size="13">the facts your embedding actually encodes</text>
+        fill="#dde9df" stroke="#3d6b4f" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="300" y="300" text-anchor="middle" fill="#3d6b4f" font-size="16" font-weight="700">indexed representation</text>
+  <text x="300" y="322" text-anchor="middle" fill="#5f594e" font-family="Menlo, monospace" font-size="12" letter-spacing="0.3">the facts your embedding actually encodes</text>
 
   <!-- covered facts (retrievable) -->
-  <g fill="#2563EB">
+  <g fill="#3d6b4f">
     <circle cx="205" cy="370" r="9"/><circle cx="258" cy="440" r="9"/><circle cx="322" cy="400" r="9"/>
     <circle cx="392" cy="360" r="9"/><circle cx="300" cy="470" r="9"/><circle cx="452" cy="420" r="9"/><circle cx="185" cy="418" r="9"/>
   </g>
 
   <!-- uncovered fact (neutral) -->
-  <circle cx="628" cy="300" r="9" fill="#9CA3AF"/>
-  <text x="628" y="330" text-anchor="middle" fill="#9CA3AF" font-size="12">uncovered</text>
+  <circle cx="628" cy="300" r="9" fill="#7a7365"/>
+  <text x="628" y="330" text-anchor="middle" fill="#7a7365" font-family="Menlo, monospace" font-size="11" letter-spacing="0.3">uncovered</text>
 
   <!-- the asked-for fact: invisible -->
-  <circle cx="672" cy="440" r="16" fill="none" stroke="#DC2626" stroke-width="2" opacity="0.4"/>
-  <circle cx="672" cy="440" r="10" fill="#DC2626"/>
-  <text x="672" y="482" text-anchor="middle" fill="#B91C1C" font-size="13" font-weight="700">the fact the user asks for</text>
-  <text x="672" y="502" text-anchor="middle" fill="#B91C1C" font-size="13" font-weight="700">— invisible</text>
+  <circle cx="672" cy="440" r="16" fill="none" stroke="#8a3b2e" stroke-width="2" opacity="0.4"/>
+  <circle cx="672" cy="440" r="10" fill="#8a3b2e"/>
+  <text x="672" y="482" text-anchor="middle" fill="#8a3b2e" font-size="14" font-weight="700">the fact the user asks for</text>
+  <text x="672" y="502" text-anchor="middle" fill="#8a3b2e" font-size="14" font-weight="700">&#8212; invisible</text>
 
   <!-- the query, reaching and missing -->
-  <rect x="856" y="196" width="272" height="120" rx="16" fill="#FEF2F2" stroke="#F0C9C4" stroke-width="1.5"/>
-  <text x="992" y="238" text-anchor="middle" fill="#B91C1C" font-size="15" font-weight="700">User question</text>
-  <text x="992" y="266" text-anchor="middle" fill="#7F5A5A" font-size="14">“What was the Q3 fee?”</text>
-  <text x="992" y="290" text-anchor="middle" fill="#9B6D6D" font-size="12.5" font-style="italic">the words are in the chunk…</text>
-  <path d="M900 316 C820 380 760 410 692 434" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#cs-arrow)"/>
+  <rect x="856" y="196" width="272" height="120" rx="0" fill="#faf8f3" stroke="#8a3b2e" stroke-width="1.5"/>
+  <text x="992" y="238" text-anchor="middle" fill="#8a3b2e" font-size="16" font-weight="700">User question</text>
+  <text x="992" y="266" text-anchor="middle" fill="#211f1b" font-size="14">&#8220;What was the Q3 fee?&#8221;</text>
+  <text x="992" y="290" text-anchor="middle" fill="#5f594e" font-family="Menlo, monospace" font-size="11.5" letter-spacing="0.3">the words are in the chunk&#8230;</text>
+  <path d="M900 316 C820 380 760 410 692 434" fill="none" stroke="#8a3b2e" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#cs-arrow)"/>
 
   <!-- caption -->
-  <rect x="360" y="566" width="480" height="60" rx="14" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
-  <text x="600" y="604" text-anchor="middle" fill="#1A1A1A" font-size="22" font-weight="700">recall  ≤  representation coverage</text>
+  <rect x="360" y="566" width="480" height="60" rx="0" fill="#faf8f3" stroke="#c9c2b2" stroke-width="1.5"/>
+  <text x="600" y="604" text-anchor="middle" fill="#211f1b" font-size="22" font-weight="700">recall &#160;&#8804;&#160; representation coverage</text>
 </svg>
