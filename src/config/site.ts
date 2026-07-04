@@ -5,7 +5,7 @@
  */
 export const site = {
   /** Shown in the nav + footer wordmark. */
-  brand: "Shivashankar Menon",
+  brand: "Shivashankar S Menon",
   /** Your full name (used in SEO + structured data). */
   author: "Shivashankar S Menon",
   /** Short role / tagline. */
