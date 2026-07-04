@@ -403,7 +403,7 @@
         if ((ddepth[i] < 0) !== near) continue;
         const t = Math.max(0, Math.min(1, ddepth[i] / R_DOT / 2 + 0.5)); // 0 near, 1 far
         const radius = lerp(2.0, 0.7, t);
-        const alpha = lerp(0.30, 0.06, t);
+        const alpha = lerp(0.55, 0.06, t);
         ctx!.globalAlpha = alpha;
         ctx!.fillStyle = `rgb(${r}, ${g}, ${b})`;
         ctx!.beginPath();
