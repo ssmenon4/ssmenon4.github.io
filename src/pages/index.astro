@@ -135,7 +135,7 @@ function venueFor(href?: string) {
               </div>
               <div class="meta-col">
                 <span class="yr">{p.year}</span>
-                <span>{p.slug === "amphoreus-dnd" ? "ONGOING" : "PUBLISHED"}</span>
+                <span>{(p.status ?? "published").toUpperCase()}</span>
                 <span>{p.tag.toUpperCase()}</span>
               </div>
             </div>

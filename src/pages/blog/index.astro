@@ -7,7 +7,7 @@ import { readingTime } from "../../lib/reading-time";
 const posts = (await getCollection("blog", ({ data }) => !data.draft));
 const series = posts.filter(p => p.data.series === "rag-revisited")
   .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
-const standalone = posts.filter(p => !p.data.series)
+const standalone = posts.filter(p => p.data.series !== "rag-revisited")
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const byYear = Object.entries(Object.groupBy(standalone, p => p.data.date.getFullYear()))
   .sort((a, b) => Number(b[0]) - Number(a[0]));
