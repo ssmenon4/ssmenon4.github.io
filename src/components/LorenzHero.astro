@@ -164,9 +164,7 @@
     let isDark = false;
     const detectDark = () => {
       const attr = document.documentElement.getAttribute("data-theme");
-      if (attr === "dark") return true;
-      if (attr === "light") return false;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+      return attr === "dark";
     };
     const buildColors = () => {
       isDark = detectDark();
@@ -269,16 +267,6 @@
       attributes: true,
       attributeFilter: ["data-theme"],
     });
-    // No explicit data-theme means the page follows the OS setting, so also
-    // react to the media query flipping (e.g. system dark mode toggled).
-    const darkMedia = window.matchMedia("(prefers-color-scheme: dark)");
-    const onMediaChange = () => {
-      if (!document.documentElement.getAttribute("data-theme")) {
-        buildColors();
-        startLoop(); // redraw (and re-park) the reduced-motion loop
-      }
-    };
-    darkMedia.addEventListener("change", onMediaChange);
 
     // ---- Render loop -----------------------------------------------------
     const px = new Float32Array(N);

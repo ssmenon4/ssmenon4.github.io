@@ -15,11 +15,6 @@
   --font-sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
   --font-mono:"JetBrains Mono Variable",ui-monospace,"SF Mono",Menlo,monospace;
 }
-@media (prefers-color-scheme: dark){
-  :root{ --bg:#0b0e15; --ink:#e8ecf2; --sub:#9aa5b5; --meta:#74839c;
-    --line:#1c2230; --line-strong:#323c50;
-    --signal:#e0a83c; --signal-bright:#f2c05e; --trail:#d69a2e; --sel:#1a2130; }
-}
 :root[data-theme="dark"]{ --bg:#0b0e15; --ink:#e8ecf2; --sub:#9aa5b5; --meta:#74839c;
   --line:#1c2230; --line-strong:#323c50;
   --signal:#e0a83c; --signal-bright:#f2c05e; --trail:#d69a2e; --sel:#1a2130; }

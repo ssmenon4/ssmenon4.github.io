@@ -1,16 +1,37 @@
-<button id="theme-toggle" aria-label="Toggle color theme" class="mono">◐</button>
+<button id="theme-toggle" class="mono" aria-label="Switch to dark mode">
+  <span class="to-dark">
+    <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+      <path d="M13.2 9.6A5.6 5.6 0 0 1 6.4 2.8a5.6 5.6 0 1 0 6.8 6.8Z" />
+    </svg>
+    dark
+  </span>
+  <span class="to-light">
+    <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+      <circle cx="8" cy="8" r="3" />
+      <path d="M8 1.2v1.6M8 13.2v1.6M1.2 8h1.6M13.2 8h1.6M3.2 3.2l1.1 1.1M11.7 11.7l1.1 1.1M12.8 3.2l-1.1 1.1M4.3 11.7l-1.1 1.1" />
+    </svg>
+    light
+  </span>
+</button>
 <style>
-  #theme-toggle{ background:none; border:none; cursor:pointer; color:var(--meta);
-    font-size:13px; padding:0; }
-  #theme-toggle:hover{ color:var(--signal); }
+  #theme-toggle{ background:none; cursor:pointer; color:var(--meta);
+    font-size:12px; padding:3px 10px; border:1px solid var(--line);
+    border-radius:999px; }
+  #theme-toggle:hover{ color:var(--signal); border-color:var(--line-strong); }
+  #theme-toggle span{ display:inline-flex; align-items:center; gap:5px; }
+  #theme-toggle .to-light{ display:none; }
+  :global([data-theme="dark"]) #theme-toggle .to-dark{ display:none; }
+  :global([data-theme="dark"]) #theme-toggle .to-light{ display:inline-flex; }
 </style>
 <script is:inline>
-  document.getElementById("theme-toggle").addEventListener("click", () => {
+  const btn = document.getElementById("theme-toggle");
+  if (document.documentElement.getAttribute("data-theme") === "dark")
+    btn.setAttribute("aria-label", "Switch to light mode");
+  btn.addEventListener("click", () => {
     const r = document.documentElement;
-    const dark = r.getAttribute("data-theme") === "dark" ||
-      (!r.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
-    const next = dark ? "light" : "dark";
+    const next = r.getAttribute("data-theme") === "dark" ? "light" : "dark";
     r.setAttribute("data-theme", next);
+    btn.setAttribute("aria-label", `Switch to ${next === "dark" ? "light" : "dark"} mode`);
     try { localStorage.setItem("theme", next); } catch {}
   });
 </script>
