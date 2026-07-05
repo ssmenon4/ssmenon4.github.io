@@ -70,7 +70,7 @@ export const education: Entry[] = [
 export const skills: { group: string; items: string[] }[] = [
   {
     group: "AI / LLMs",
-    items: ["RAG", "LLM Orchestration", "Agentic Workflows", "Conversational AI", "Gen AI"],
+    items: ["RAG", "LLM Orchestration", "Agentic Workflows", "Conversational AI"],
   },
   {
     group: "ML / DL",
@@ -87,11 +87,12 @@ export const skills: { group: string; items: string[] }[] = [
   {
     group: "Policy & Analysis",
     items: [
+      "Research & Synthesis",
       "Public Policy",
       "Economics",
       "Public Administration",
       "International Relations",
-      "Research & Synthesis",
+      "Good Governance",
       "Analytical Writing",
     ],
   },
