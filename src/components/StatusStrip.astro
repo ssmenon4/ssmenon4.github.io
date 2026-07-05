@@ -7,5 +7,7 @@ const { lastCommitRelative } = buildInfo();
   <div><span class="led">●</span> {nowStatus.openTo}</div>
   <div>LAST COMMIT <b>{lastCommitRelative}</b></div>
   <div>CURRENTLY BUILDING <b>{nowStatus.building}</b></div>
-  {nowStatus.reading && <div>READING <b>{nowStatus.reading}</b></div>}
+  {nowStatus.reading &&  <div class="wide">READING <b>{nowStatus.reading}</b></div>}
+  {nowStatus.listening &&  <div class="wide">LISTENING TO <b>{nowStatus.listening}</b></div>}
+  
 </div>

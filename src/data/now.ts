@@ -4,4 +4,5 @@ export const nowStatus = {
   openTo: "OPEN TO INTERESTING PROBLEMS",
   building: "AMPHOREUS",
   reading: "", // e.g. "“CHAOS” — GLEICK"; empty string hides the cell
+  listening: ""
 };

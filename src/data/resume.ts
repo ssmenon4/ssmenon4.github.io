@@ -41,8 +41,9 @@ export const experience: Entry[] = [
     org: "American Express",
     period: "Jul 2022 - Dec 2022",
     summary:
-      "Member of the R&D team for proprietary XGBoost algorithms, helping develop Distributed GPU Learning modes.",
+      "Member of the R&D team in-charge of developing Distributed GPU Learning modes for AmEx proprietary XGBoost algorithms.",
     highlights: [
+      "Tested the new modes throughout the development cycle on internal datasets and analyzed them on GINI, AUC, train/turnaround times, Capture Rate at 20 percentile etc",
       "New modes trained models 20x faster and readied them 5x faster than the then-most widely-used mode.",
       "Shipped as an official feature update (v3.0, Nov 2022) in the company's algorithm.",
     ],
@@ -69,7 +70,7 @@ export const education: Entry[] = [
 export const skills: { group: string; items: string[] }[] = [
   {
     group: "AI / LLMs",
-    items: ["RAG", "LLM Orchestration", "Knowledge Graphs", "Conversational AI", "Gen AI"],
+    items: ["RAG", "LLM Orchestration", "Agentic Workflows", "Conversational AI", "Gen AI"],
   },
   {
     group: "ML / DL",
